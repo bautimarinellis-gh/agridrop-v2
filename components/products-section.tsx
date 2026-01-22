@@ -1,3 +1,5 @@
+"use client"
+
 import { Download, TrendingUp, Droplets, Leaf, Beaker, Plane } from "lucide-react"
 import { Button } from "@/components/ui/button"
 
@@ -17,6 +19,7 @@ const products = [
     badge: "Estabilidad Total",
     color: "cyan",
     icon: Plane,
+    pdfFile: "flow_folleto.pdf",
   },
   {
     name: "Drop Elixir",
@@ -25,6 +28,7 @@ const products = [
     badge: "Anti-evaporante",
     color: "gold",
     icon: Droplets,
+    pdfFile: "elixir_folleto.pdf",
   },
   {
     name: "Drop Thor",
@@ -33,6 +37,7 @@ const products = [
     badge: "Eco-Friendly",
     color: "green",
     icon: Leaf,
+    pdfFile: "thor_folleto.pdf",
   },
   {
     name: "Drop Quality",
@@ -41,6 +46,7 @@ const products = [
     badge: "Calidad de Aplicación",
     color: "purple",
     icon: Beaker,
+    pdfFile: "quality_folleto.pdf",
   },
 ]
 
@@ -78,6 +84,17 @@ const colorStyles: Record<string, { border: string; glow: string; badge: string;
 }
 
 export function ProductsSection() {
+  const handleDownload = (pdfFileName: string) => {
+    const link = document.createElement("a")
+    link.href = `/${pdfFileName}`
+    link.download = pdfFileName
+    link.target = "_blank"
+    link.rel = "noopener noreferrer"
+    document.body.appendChild(link)
+    link.click()
+    document.body.removeChild(link)
+  }
+
   return (
     <section id="productos" className="border-t border-border px-4 py-24">
       <div className="mx-auto max-w-7xl">
@@ -124,6 +141,8 @@ export function ProductsSection() {
                   variant="outline"
                   size="sm"
                   className="mt-6 w-full gap-2 border-border bg-transparent text-foreground hover:bg-card"
+                  onClick={() => product.pdfFile && handleDownload(product.pdfFile)}
+                  disabled={!product.pdfFile}
                 >
                   <Download className="h-4 w-4" />
                   Descargar Ficha Técnica

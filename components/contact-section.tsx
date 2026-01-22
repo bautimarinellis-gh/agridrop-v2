@@ -99,7 +99,7 @@ export function ContactSection() {
           {/* Bottom */}
           <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
             <p className="text-sm text-muted-foreground">
-              © 2025 AgriDrop SRL. Todos los derechos reservados.
+              © 2026 AgriDrop SRL. Todos los derechos reservados.
             </p>
             <div className="flex gap-2">
               {["bg-orange-400", "bg-cyan-400", "bg-amber-400", "bg-green-400", "bg-violet-400"].map((color, i) => (

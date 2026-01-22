@@ -45,10 +45,8 @@ export function HeroSection() {
         </div>
 
         {/* Stats */}
-        <div className="mt-20 grid grid-cols-2 gap-8 md:grid-cols-4">
+        <div className="mt-20 flex justify-center gap-8">
           {[
-            { value: "500+", label: "Productores" },
-            { value: "5", label: "Productos" },
             { value: "ISO 9001", label: "Certificado" },
             { value: "ISO 14001", label: "Ambiental" },
           ].map((stat) => (
