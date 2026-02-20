@@ -1,60 +1,46 @@
-import { Button } from "@/components/ui/button"
-import { ArrowRight, Zap } from "lucide-react"
+import Image from "next/image"
+import { ArrowRight } from "lucide-react"
 
 export function HeroSection() {
   return (
-    <section id="inicio" className="relative min-h-screen overflow-hidden">
-      {/* Grid Background */}
-      <div className="absolute inset-0 grid-pattern" />
-      
-      {/* Gradient Orbs */}
-      <div className="absolute left-1/4 top-1/4 h-96 w-96 rounded-full bg-primary/20 blur-3xl" />
-      <div className="absolute bottom-1/4 right-1/4 h-96 w-96 rounded-full bg-cyan-500/10 blur-3xl" />
+    <section
+      id="inicio"
+      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20"
+    >
+      <Image
+        src="/images/inicio-agridrop.jpg"
+        alt="Modern agriculture field with advanced technology"
+        fill
+        className="object-cover"
+        priority
+      />
+      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
 
-      <div className="relative mx-auto flex min-h-screen max-w-7xl flex-col items-center justify-center px-4 py-32 text-center">
-        {/* Badge */}
-        <div className="mb-8 inline-flex items-center gap-2 rounded-full border border-primary/30 bg-primary/10 px-4 py-2">
-          <Zap className="h-4 w-4 text-primary" />
-          <span className="text-sm font-medium text-primary">Tecnología Agro de Alta Precisión</span>
-        </div>
-
-        {/* Headline */}
-        <h1 className="max-w-4xl text-4xl font-bold leading-tight tracking-tight text-foreground md:text-5xl lg:text-7xl">
-          Desarrollo Tecnológico{" "}
-          <span className="bg-gradient-to-r from-primary to-cyan-400 bg-clip-text text-transparent">
-            Superior
-          </span>{" "}
-          para tu Cultivo
-        </h1>
-
-        {/* Subheadline */}
-        <p className="mt-6 max-w-2xl text-lg text-muted-foreground lg:text-xl">
-          Soluciones de formulación avanzada: Bioestimulantes y Coadyuvantes diseñados 
-          para maximizar el rendimiento agrícola.
+      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-28 text-center">
+        <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground/80">
+          Soluciones Agrícolas del Futuro
         </p>
-
-        {/* CTAs */}
-        <div className="mt-10 flex flex-col gap-4 sm:flex-row">
-          <Button size="lg" className="gap-2 bg-primary px-8 text-primary-foreground hover:bg-primary/90">
-            Ver Productos
-            <ArrowRight className="h-4 w-4" />
-          </Button>
-          <Button size="lg" variant="outline" className="gap-2 border-border bg-transparent px-8 text-foreground hover:bg-card">
-            Contactar
-          </Button>
-        </div>
-
-        {/* Stats */}
-        <div className="mt-20 flex justify-center gap-8">
-          {[
-            { value: "ISO 9001", label: "Certificado" },
-            { value: "ISO 14001", label: "Ambiental" },
-          ].map((stat) => (
-            <div key={stat.label} className="rounded-xl border border-border bg-card/50 p-4">
-              <div className="text-2xl font-bold text-foreground">{stat.value}</div>
-              <div className="text-sm text-muted-foreground">{stat.label}</div>
-            </div>
-          ))}
+        <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-primary-foreground sm:text-5xl md:text-6xl lg:text-7xl">
+          Potenciamos tu rendimiento con tecnología y sustentabilidad
+        </h1>
+        <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-primary-foreground/80">
+          Desarrollamos productos innovadores que optimizan el crecimiento de tus
+          cultivos, respetando el medio ambiente y maximizando tu productividad.
+        </p>
+        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
+          <a
+            href="#productos"
+            className="inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-base font-semibold text-primary-foreground shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl"
+          >
+            Explorar Productos
+            <ArrowRight className="h-5 w-5" />
+          </a>
+          <a
+            href="#nosotros"
+            className="inline-flex items-center gap-2 rounded-lg border-2 border-white bg-white/10 px-8 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/25"
+          >
+            Conoce Más
+          </a>
         </div>
       </div>
     </section>

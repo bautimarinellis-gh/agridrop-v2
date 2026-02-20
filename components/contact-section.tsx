@@ -1,113 +1,148 @@
-import { MapPin, Globe, Mail, Droplet, MessageCircle } from "lucide-react"
-import { Button } from "@/components/ui/button"
+"use client"
+
+import { useState, type FormEvent } from "react"
+import { Phone, Mail, MapPin, Send } from "lucide-react"
 
 export function ContactSection() {
+  const [submitted, setSubmitted] = useState(false)
+
+  function handleSubmit(e: FormEvent<HTMLFormElement>) {
+    e.preventDefault()
+    setSubmitted(true)
+  }
+
   return (
-    <section id="contacto" className="border-t border-border px-4 py-24">
-      <div className="mx-auto max-w-7xl">
-        {/* CTA Card */}
-        <div className="rounded-xl border border-primary/30 bg-gradient-to-br from-primary/20 to-primary/5 p-8 lg:p-12">
-          <div className="mx-auto max-w-2xl text-center">
-            <h2 className="text-3xl font-bold text-foreground lg:text-4xl">
-              Optimiza tu próxima campaña
-            </h2>
-            <p className="mt-4 text-lg text-muted-foreground">
-              Nuestro equipo técnico está listo para asesorarte en la elección del producto ideal para tu cultivo.
-            </p>
-            <div className="mt-8 flex justify-center">
-              <Button size="lg" asChild className="gap-2 bg-primary px-8 text-primary-foreground hover:bg-primary/90">
-                <a href="mailto:ventas@agridrop.com.ar">
-                  <Mail className="h-5 w-5" />
-                  Enviar Email
-                </a>
-              </Button>
-            </div>
-          </div>
+    <section id="contacto" className="bg-background py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
+            Contacto
+          </p>
+          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+            Hablemos de tu proyecto
+          </h2>
+          <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
+            Nuestro equipo está listo para asesorarte y encontrar la solución ideal
+            para tus cultivos.
+          </p>
         </div>
 
-        {/* Footer */}
-        <footer className="mt-16">
-          <div className="grid gap-8 md:grid-cols-4">
-            {/* Company */}
-            <div className="md:col-span-2">
-              <div className="flex items-center gap-2">
-                <div className="flex h-10 w-10 items-center justify-center rounded-lg bg-primary">
-                  <Droplet className="h-5 w-5 text-primary-foreground" />
-                </div>
-                <span className="text-xl font-semibold tracking-tight text-foreground">AgriDrop</span>
+        <div className="mt-16 grid gap-12 lg:grid-cols-2">
+          <div className="flex flex-col gap-8">
+            <div className="flex gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                <Phone className="h-5 w-5 text-primary" />
               </div>
-              <p className="mt-4 max-w-sm text-sm leading-relaxed text-muted-foreground">
-                Desarrollo y fabricación de coadyuvantes y bioestimulantes para la agricultura moderna.
-              </p>
-              <div className="mt-6 flex items-center gap-3">
-                <span className="rounded-lg border border-border bg-card px-3 py-1.5 text-xs font-semibold text-foreground">
-                  ISO 9001
-                </span>
-                <span className="rounded-lg border border-primary/30 bg-primary/10 px-3 py-1.5 text-xs font-semibold text-primary">
-                  ISO 14001
-                </span>
+              <div>
+                <h3 className="text-lg font-semibold text-foreground">
+                  Telefono
+                </h3>
+                <p className="mt-1 text-base text-muted-foreground">
+                  +54 11 5555-0123
+                </p>
               </div>
             </div>
 
-            {/* Products */}
-            <div>
-              <h3 className="text-sm font-semibold text-foreground">Productos</h3>
-              <div className="mt-4 flex flex-col gap-3">
-                {[
-                  { name: "Drop Forte", color: "bg-orange-400" },
-                  { name: "Drop Flow", color: "bg-cyan-400" },
-                  { name: "Drop Elixir", color: "bg-amber-400" },
-                  { name: "Drop Thor", color: "bg-green-400" },
-                  { name: "Drop Quality", color: "bg-violet-400" },
-                ].map((product) => (
-                  <a
-                    key={product.name}
-                    href="#productos"
-                    className="flex items-center gap-2 text-sm text-muted-foreground transition-smooth hover:text-foreground"
+            <div className="flex gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                <Mail className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-foreground">Email</h3>
+                <p className="mt-1 text-base text-muted-foreground">
+                  info@agridrop.com.ar
+                </p>
+              </div>
+            </div>
+
+            <div className="flex gap-4">
+              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
+                <MapPin className="h-5 w-5 text-primary" />
+              </div>
+              <div>
+                <h3 className="text-lg font-semibold text-foreground">
+                  Ubicación
+                </h3>
+                <p className="mt-1 text-base text-muted-foreground">
+                  Ruta 33 km 540
+                  <br />
+                  Rufino, Santa Fe, Argentina
+                </p>
+              </div>
+            </div>
+          </div>
+
+          <div className="rounded-xl border border-border bg-card p-8 shadow-xl">
+            {submitted ? (
+              <div className="flex flex-col items-center justify-center py-12 text-center">
+                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
+                  <Send className="h-7 w-7 text-primary" />
+                </div>
+                <h3 className="text-xl font-bold text-card-foreground">
+                  Mensaje enviado
+                </h3>
+                <p className="mt-2 text-sm text-muted-foreground">
+                  Gracias por contactarnos. Nos comunicaremos a la brevedad.
+                </p>
+              </div>
+            ) : (
+              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
+                <div>
+                  <label
+                    htmlFor="name"
+                    className="mb-1.5 block text-sm font-medium text-card-foreground"
                   >
-                    <span className={`h-2 w-2 rounded-full ${product.color}`} />
-                    {product.name}
-                  </a>
-                ))}
-              </div>
-            </div>
-
-            {/* Contact */}
-            <div>
-              <h3 className="text-sm font-semibold text-foreground">Contacto</h3>
-              <div className="mt-4 flex flex-col gap-3 text-sm text-muted-foreground">
-                <div className="flex items-start gap-2">
-                  <MapPin className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                  <span>Ruta 33 km. 540, Rufino, Santa Fe</span>
+                    Nombre
+                  </label>
+                  <input
+                    id="name"
+                    type="text"
+                    required
+                    placeholder="Tu nombre completo"
+                    className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary"
+                  />
                 </div>
-                <div className="flex items-center gap-2">
-                  <Globe className="h-4 w-4 shrink-0 text-primary" />
-                  <a href="https://www.agridrop.com.ar" className="transition-smooth hover:text-foreground">
-                    www.agridrop.com.ar
-                  </a>
+                <div>
+                  <label
+                    htmlFor="email"
+                    className="mb-1.5 block text-sm font-medium text-card-foreground"
+                  >
+                    Email
+                  </label>
+                  <input
+                    id="email"
+                    type="email"
+                    required
+                    placeholder="tu@email.com"
+                    className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary"
+                  />
                 </div>
-                <div className="flex items-center gap-2">
-                  <Mail className="h-4 w-4 shrink-0 text-primary" />
-                  <a href="mailto:ventas@agridrop.com.ar" className="transition-smooth hover:text-foreground">
-                    ventas@agridrop.com.ar
-                  </a>
+                <div>
+                  <label
+                    htmlFor="message"
+                    className="mb-1.5 block text-sm font-medium text-card-foreground"
+                  >
+                    Mensaje
+                  </label>
+                  <textarea
+                    id="message"
+                    required
+                    rows={4}
+                    placeholder="Cuéntanos cómo podemos ayudarte..."
+                    className="w-full resize-none rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary"
+                  />
                 </div>
-              </div>
-            </div>
+                <button
+                  type="submit"
+                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
+                >
+                  <Send className="h-4 w-4" />
+                  Enviar Mensaje
+                </button>
+              </form>
+            )}
           </div>
-
-          {/* Bottom */}
-          <div className="mt-12 flex flex-col items-center justify-between gap-4 border-t border-border pt-8 md:flex-row">
-            <p className="text-sm text-muted-foreground">
-              © 2026 AgriDrop SRL. Todos los derechos reservados.
-            </p>
-            <div className="flex gap-2">
-              {["bg-orange-400", "bg-cyan-400", "bg-amber-400", "bg-green-400", "bg-violet-400"].map((color, i) => (
-                <div key={i} className={`h-2 w-2 rounded-full ${color}`} />
-              ))}
-            </div>
-          </div>
-        </footer>
+        </div>
       </div>
     </section>
   )

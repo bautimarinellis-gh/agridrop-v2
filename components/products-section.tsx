@@ -1,155 +1,111 @@
 "use client"
 
-import { Download, TrendingUp, Droplets, Leaf, Beaker, Plane } from "lucide-react"
-import { Button } from "@/components/ui/button"
+import { Download } from "lucide-react"
 
 const products = [
   {
     name: "Drop Forte",
-    type: "Bioestimulante Foliar",
-    description: "Formulado con metabolitos, micronutrientes y fitohormonas. Activa mecanismos de defensa y aumenta el rendimiento en Soja y Maíz.",
-    badge: "+Rendimiento",
-    color: "orange",
-    icon: TrendingUp,
+    color: "#e97316",
+    description:
+      "Bioestimulante de alta concentración que fortalece la estructura celular de los cultivos, incrementando su resistencia a condiciones de estrés.",
   },
   {
     name: "Drop Flow",
-    type: "Coadyuvante de Compatibilidad",
-    description: "Evita que las mezclas se corten. Emulsionante y dispersante. Ideal para aplicaciones con Drones y bajo volumen.",
-    badge: "Estabilidad Total",
-    color: "cyan",
-    icon: Plane,
-    pdfFile: "flow_folleto.pdf",
+    color: "#06b6d4",
+    description:
+      "Coadyuvante agrícola que mejora la absorción y distribución de nutrientes, optimizando la eficiencia de tus aplicaciones foliares.",
   },
   {
     name: "Drop Elixir",
-    type: "Coadyuvante Premium",
-    description: "Microemulsión con aceite metilado y organosilicona. Reduce la evaporación y mejora la penetración en altas temperaturas.",
-    badge: "Anti-evaporante",
-    color: "gold",
-    icon: Droplets,
-    pdfFile: "elixir_folleto.pdf",
+    color: "#eab308",
+    description:
+      "Fórmula enriquecida con micronutrientes esenciales que potencia la fotosíntesis y el metabolismo vegetal para un crecimiento excepcional.",
   },
   {
     name: "Drop Thor",
-    type: "Coadyuvante Ecológico",
-    description: "Biodegradable y súper concentrado (48% activos). Máxima adherencia y humectación con tecnología antiespumante.",
-    badge: "Eco-Friendly",
-    color: "green",
-    icon: Leaf,
-    pdfFile: "thor_folleto.pdf",
+    color: "#22c55e",
+    description:
+      "Protector biológico que refuerza las defensas naturales del cultivo frente a enfermedades y plagas, promoviendo un desarrollo saludable.",
   },
   {
     name: "Drop Quality",
-    type: "Corrector de Aguas",
-    description: "Secuestrante de cationes y corrector de pH. Poder buffer que asegura un rango de pH 4.5-6.5.",
-    badge: "Calidad de Aplicación",
-    color: "purple",
-    icon: Beaker,
-    pdfFile: "quality_folleto.pdf",
+    color: "#a855f7",
+    description:
+      "Mejorador de calidad diseñado para potenciar las características organolépticas de frutas y hortalizas en las etapas finales de desarrollo.",
   },
 ]
 
-const colorStyles: Record<string, { border: string; glow: string; badge: string; text: string }> = {
-  orange: {
-    border: "border-orange-500/50 hover:border-orange-400",
-    glow: "hover:glow-orange",
-    badge: "bg-orange-500/20 text-orange-400",
-    text: "text-orange-400",
-  },
-  cyan: {
-    border: "border-cyan-500/50 hover:border-cyan-400",
-    glow: "hover:glow-cyan",
-    badge: "bg-cyan-500/20 text-cyan-400",
-    text: "text-cyan-400",
-  },
-  gold: {
-    border: "border-amber-500/50 hover:border-amber-400",
-    glow: "hover:glow-gold",
-    badge: "bg-amber-500/20 text-amber-400",
-    text: "text-amber-400",
-  },
-  green: {
-    border: "border-green-500/50 hover:border-green-400",
-    glow: "hover:glow-green",
-    badge: "bg-green-500/20 text-green-400",
-    text: "text-green-400",
-  },
-  purple: {
-    border: "border-violet-500/50 hover:border-violet-400",
-    glow: "hover:glow-purple",
-    badge: "bg-violet-500/20 text-violet-400",
-    text: "text-violet-400",
-  },
-}
-
 export function ProductsSection() {
-  const handleDownload = (pdfFileName: string) => {
-    const link = document.createElement("a")
-    link.href = `/${pdfFileName}`
-    link.download = pdfFileName
-    link.target = "_blank"
-    link.rel = "noopener noreferrer"
-    document.body.appendChild(link)
-    link.click()
-    document.body.removeChild(link)
-  }
-
   return (
-    <section id="productos" className="border-t border-border px-4 py-24">
-      <div className="mx-auto max-w-7xl">
-        {/* Section Header */}
-        <div className="mb-16 text-center">
-          <span className="text-sm font-medium uppercase tracking-wider text-primary">Nuestra Línea</span>
-          <h2 className="mt-4 text-3xl font-bold tracking-tight text-foreground md:text-4xl">
-            Productos de Alta Performance
+    <section id="productos" className="bg-secondary py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-6">
+        <div className="mx-auto max-w-2xl text-center">
+          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
+            Productos
+          </p>
+          <h2 className="text-balance text-3xl font-bold tracking-tight text-secondary-foreground sm:text-4xl">
+            Nuestra línea de productos
           </h2>
-          <p className="mt-4 text-muted-foreground">
-            Soluciones especializadas para cada necesidad agronómica
+          <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
+            Soluciones especializadas para cada etapa del ciclo productivo,
+            formuladas con la mejor tecnología.
           </p>
         </div>
 
-        {/* Products Grid */}
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {products.map((product) => {
-            const styles = colorStyles[product.color]
-            const Icon = product.icon
-            return (
+        <div className="mt-16 grid gap-6 sm:grid-cols-2 lg:grid-cols-3">
+          {products.map((product) => (
+            <article
+              key={product.name}
+              className="group relative flex flex-col overflow-hidden rounded-xl border border-border bg-card transition-shadow hover:shadow-lg"
+            >
               <div
-                key={product.name}
-                className={`group flex flex-col rounded-xl border bg-card/50 p-6 backdrop-blur-sm transition-smooth ${styles.border} ${styles.glow}`}
-              >
-                {/* Header */}
-                <div className="mb-4 flex items-start justify-between">
-                  <div className={`flex h-12 w-12 items-center justify-center rounded-lg ${styles.badge}`}>
-                    <Icon className="h-6 w-6" />
+                className="h-1.5"
+                style={{ backgroundColor: product.color }}
+              />
+              <div className="flex flex-1 flex-col p-6">
+                <div className="mb-4 flex items-center gap-3">
+                  <div
+                    className="flex h-10 w-10 items-center justify-center rounded-lg"
+                    style={{ backgroundColor: `${product.color}15` }}
+                  >
+                    <svg
+                      className="h-5 w-5"
+                      fill={product.color}
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 17.93c-3.95-.49-7-3.85-7-7.93 0-.62.08-1.21.21-1.79L9 15v1c0 1.1.9 2 2 2v1.93zm6.9-2.54c-.26-.81-1-1.39-1.9-1.39h-1v-3c0-.55-.45-1-1-1H8v-2h2c.55 0 1-.45 1-1V7h2c1.1 0 2-.9 2-2v-.41c2.93 1.19 5 4.06 5 7.41 0 2.08-.8 3.97-2.1 5.39z" />
+                    </svg>
                   </div>
-                  <span className={`rounded-full px-3 py-1 text-xs font-medium ${styles.badge}`}>
-                    {product.badge}
-                  </span>
+                  <h3 className="text-lg font-bold text-card-foreground">
+                    {product.name}
+                  </h3>
                 </div>
-
-                {/* Content */}
-                <h3 className="text-xl font-semibold text-foreground">{product.name}</h3>
-                <p className={`mt-1 text-sm font-medium ${styles.text}`}>{product.type}</p>
-                <p className="mt-4 flex-1 text-sm leading-relaxed text-muted-foreground">
+                <p className="flex-1 text-sm leading-relaxed text-muted-foreground">
                   {product.description}
                 </p>
-
-                {/* Download Button */}
-                <Button
-                  variant="outline"
-                  size="sm"
-                  className="mt-6 w-full gap-2 border-border bg-transparent text-foreground hover:bg-card"
-                  onClick={() => product.pdfFile && handleDownload(product.pdfFile)}
-                  disabled={!product.pdfFile}
+                <button
+                  className="mt-6 inline-flex w-full items-center justify-center gap-2 rounded-lg border-2 px-4 py-2.5 text-sm font-semibold text-slate-900 transition-colors"
+                  style={{
+                    borderColor: product.color,
+                  }}
+                  onMouseEnter={(e) => {
+                    const el = e.currentTarget
+                    el.style.backgroundColor = product.color
+                    el.style.color = "#0f172a"
+                  }}
+                  onMouseLeave={(e) => {
+                    const el = e.currentTarget
+                    el.style.backgroundColor = "transparent"
+                    el.style.color = "#0f172a"
+                  }}
                 >
                   <Download className="h-4 w-4" />
                   Descargar Ficha Técnica
-                </Button>
+                </button>
               </div>
-            )
-          })}
+            </article>
+          ))}
         </div>
       </div>
     </section>
