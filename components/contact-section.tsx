@@ -1,147 +1,84 @@
-"use client"
+import { Phone, Mail, MapPin, MessageCircle } from "lucide-react"
 
-import { useState, type FormEvent } from "react"
-import { Phone, Mail, MapPin, Send } from "lucide-react"
+const contactCards = [
+  {
+    icon: Phone,
+    text: "+54 11 5555-0123",
+    subtext: "Teléfono",
+    href: "tel:+541155550123",
+    ariaLabel: "Llamar a Agridrop",
+  },
+  {
+    icon: Mail,
+    text: "agridrop@gmail.com",
+    subtext: "Escríbenos",
+    href: "mailto:agridrop@gmail.com",
+    ariaLabel: "Enviar email a Agridrop",
+  },
+  {
+    icon: MapPin,
+    text: "Ruta 33 km 540, Rufino",
+    subtext: "Santa Fe, Argentina",
+    href: "https://maps.google.com/?q=Ruta+33+km+540,+Rufino,+Santa+Fe,+Argentina",
+    ariaLabel: "Ver ubicación en mapa",
+  },
+] as const
 
 export function ContactSection() {
-  const [submitted, setSubmitted] = useState(false)
-
-  function handleSubmit(e: FormEvent<HTMLFormElement>) {
-    e.preventDefault()
-    setSubmitted(true)
-  }
-
   return (
-    <section id="contacto" className="bg-background py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6">
+    <section id="contacto" className="bg-background py-16 sm:py-24 lg:py-32">
+      <div className="mx-auto max-w-7xl px-4 sm:px-6">
         <div className="mx-auto max-w-2xl text-center">
           <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
             Contacto
           </p>
-          <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
+          <h2 className="text-balance text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
             Hablemos de tu proyecto
           </h2>
-          <p className="mt-4 text-pretty text-lg leading-relaxed text-muted-foreground">
+          <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
             Nuestro equipo está listo para asesorarte y encontrar la solución ideal
             para tus cultivos.
           </p>
         </div>
 
-        <div className="mt-16 grid gap-12 lg:grid-cols-2">
-          <div className="flex flex-col gap-8">
-            <div className="flex gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                <Phone className="h-5 w-5 text-primary" />
+        <div className="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-4 sm:mt-16 sm:grid-cols-3">
+          {contactCards.map(({ icon: Icon, text, subtext, href, ariaLabel }) => (
+            <a
+              key={href}
+              href={href}
+              target={href.startsWith("http") ? "_blank" : undefined}
+              rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
+              aria-label={ariaLabel}
+              className="group flex flex-row items-center justify-start gap-4 rounded-xl border border-border bg-card p-4 shadow-md transition-all hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:aspect-square sm:flex-col sm:items-center sm:justify-center sm:gap-2"
+            >
+              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/15 sm:h-10 sm:w-10">
+                <Icon className="h-5 w-5 text-primary" />
               </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground">
-                  Telefono
-                </h3>
-                <p className="mt-1 text-base text-muted-foreground">
-                  +54 11 5555-0123
-                </p>
+              <div className="min-w-0 flex-1 text-left sm:w-full sm:flex-none sm:text-center">
+                <p className="break-words text-sm font-semibold text-foreground">{text}</p>
+                <p className="mt-0.5 text-xs text-muted-foreground">{subtext}</p>
               </div>
-            </div>
+            </a>
+          ))}
+        </div>
 
-            <div className="flex gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                <Mail className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground">Email</h3>
-                <p className="mt-1 text-base text-muted-foreground">
-                  info@agridrop.com.ar
-                </p>
-              </div>
-            </div>
-
-            <div className="flex gap-4">
-              <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary/10">
-                <MapPin className="h-5 w-5 text-primary" />
-              </div>
-              <div>
-                <h3 className="text-lg font-semibold text-foreground">
-                  Ubicación
-                </h3>
-                <p className="mt-1 text-base text-muted-foreground">
-                  Ruta 33 km 540
-                  <br />
-                  Rufino, Santa Fe, Argentina
-                </p>
-              </div>
-            </div>
-          </div>
-
-          <div className="rounded-xl border border-border bg-card p-8 shadow-xl">
-            {submitted ? (
-              <div className="flex flex-col items-center justify-center py-12 text-center">
-                <div className="mb-4 flex h-16 w-16 items-center justify-center rounded-full bg-primary/10">
-                  <Send className="h-7 w-7 text-primary" />
-                </div>
-                <h3 className="text-xl font-bold text-card-foreground">
-                  Mensaje enviado
-                </h3>
-                <p className="mt-2 text-sm text-muted-foreground">
-                  Gracias por contactarnos. Nos comunicaremos a la brevedad.
-                </p>
-              </div>
-            ) : (
-              <form onSubmit={handleSubmit} className="flex flex-col gap-5">
-                <div>
-                  <label
-                    htmlFor="name"
-                    className="mb-1.5 block text-sm font-medium text-card-foreground"
-                  >
-                    Nombre
-                  </label>
-                  <input
-                    id="name"
-                    type="text"
-                    required
-                    placeholder="Tu nombre completo"
-                    className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="email"
-                    className="mb-1.5 block text-sm font-medium text-card-foreground"
-                  >
-                    Email
-                  </label>
-                  <input
-                    id="email"
-                    type="email"
-                    required
-                    placeholder="tu@email.com"
-                    className="w-full rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary"
-                  />
-                </div>
-                <div>
-                  <label
-                    htmlFor="message"
-                    className="mb-1.5 block text-sm font-medium text-card-foreground"
-                  >
-                    Mensaje
-                  </label>
-                  <textarea
-                    id="message"
-                    required
-                    rows={4}
-                    placeholder="Cuéntanos cómo podemos ayudarte..."
-                    className="w-full resize-none rounded-lg border border-input bg-background px-4 py-2.5 text-sm text-foreground outline-none transition-colors placeholder:text-muted-foreground focus:border-primary focus:ring-1 focus:ring-primary"
-                  />
-                </div>
-                <button
-                  type="submit"
-                  className="inline-flex items-center justify-center gap-2 rounded-lg bg-primary px-6 py-3 text-sm font-semibold text-primary-foreground transition-colors hover:bg-primary/90"
-                >
-                  <Send className="h-4 w-4" />
-                  Enviar Mensaje
-                </button>
-              </form>
-            )}
-          </div>
+        <div className="mt-12 flex flex-col items-center gap-3">
+          <p className="text-center text-sm font-medium text-foreground sm:text-base">
+            La forma más rápida de comunicarte con nosotros
+          </p>
+          <a
+            href="https://wa.me/5491155550123"
+            target="_blank"
+            rel="noopener noreferrer"
+            aria-label="Chatear por WhatsApp con Agridrop"
+            className="inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-xl bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground shadow-lg transition-all hover:scale-[1.02] hover:bg-primary/90 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
+          >
+            <MessageCircle className="h-5 w-5" strokeWidth={2} />
+            Chatear por WhatsApp
+          </a>
+          <p className="text-center text-sm text-muted-foreground">
+            Horario de atención: Lunes a Sábado de 8:00 a 19:00
+          </p>
         </div>
       </div>
     </section>
