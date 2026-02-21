@@ -3,9 +3,9 @@ import { Phone, Mail, MapPin, MessageCircle } from "lucide-react"
 const contactCards = [
   {
     icon: Phone,
-    text: "+54 11 5555-0123",
+    text: "+54 3382405621",
     subtext: "Teléfono",
-    href: "tel:+541155550123",
+    href: "tel:+543382405621",
     ariaLabel: "Llamar a Agridrop",
   },
   {
@@ -33,7 +33,7 @@ export function ContactSection() {
             Contacto
           </p>
           <h2 className="text-balance text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
-            Hablemos de tu proyecto
+            Hablemos de tus necesidades
           </h2>
           <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
             Nuestro equipo está listo para asesorarte y encontrar la solución ideal
@@ -67,7 +67,7 @@ export function ContactSection() {
             La forma más rápida de comunicarte con nosotros
           </p>
           <a
-            href="https://wa.me/5491155550123"
+            href="https://wa.me/543382405621"
             target="_blank"
             rel="noopener noreferrer"
             aria-label="Chatear por WhatsApp con Agridrop"
