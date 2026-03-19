@@ -1,86 +1,159 @@
-import { Phone, Mail, MapPin, MessageCircle } from "lucide-react"
+"use client"
 
-const contactCards = [
+import { MessageCircle } from "lucide-react"
+
+const contactItems = [
   {
-    icon: Phone,
-    text: "+54 3382405621",
-    subtext: "Teléfono",
-    href: "tel:+543382405621",
-    ariaLabel: "Llamar a Agridrop",
-  },
-  {
-    icon: Mail,
-    text: "agridrop@gmail.com",
-    subtext: "Escríbenos",
-    href: "mailto:agridrop@gmail.com",
-    ariaLabel: "Enviar email a Agridrop",
-  },
-  {
-    icon: MapPin,
-    text: "Ruta 33 km 540, Rufino",
-    subtext: "Santa Fe, Argentina",
+    label: "UBICACIÓN",
+    value: "Ruta 33, Km 540",
+    sub: "Rufino, Santa Fe",
     href: "https://maps.google.com/?q=Ruta+33+km+540,+Rufino,+Santa+Fe,+Argentina",
-    ariaLabel: "Ver ubicación en mapa",
   },
-] as const
+  {
+    label: "E-MAIL",
+    value: "quintales.marinelli@gmail.com",
+    sub: null,
+    href: "quintales.marinelli@gmail.com",
+  },
+  {
+    label: "COMERCIAL",
+    value: "+54 3382 405621",
+    sub: null,
+    href: "tel:+543382405621",
+  },
+]
 
 export function ContactSection() {
   return (
-    <section id="contacto" className="bg-background py-16 sm:py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-4 sm:px-6">
-        <div className="mx-auto max-w-2xl text-center">
-          <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
-            Contacto
-          </p>
-          <h2 className="text-balance text-2xl font-bold tracking-tight text-foreground sm:text-3xl md:text-4xl">
-            Hablemos de tus necesidades
-          </h2>
-          <p className="mt-4 text-pretty text-base leading-relaxed text-muted-foreground sm:text-lg">
-            Nuestro equipo está listo para asesorarte y encontrar la solución ideal
-            para tus cultivos.
-          </p>
-        </div>
+    <section id="contacto" style={{ backgroundColor: "var(--surface-dim)" }}>
 
-        <div className="mx-auto mt-12 grid max-w-2xl grid-cols-1 gap-4 sm:mt-16 sm:grid-cols-3">
-          {contactCards.map(({ icon: Icon, text, subtext, href, ariaLabel }) => (
-            <a
-              key={href}
-              href={href}
-              target={href.startsWith("http") ? "_blank" : undefined}
-              rel={href.startsWith("http") ? "noopener noreferrer" : undefined}
-              aria-label={ariaLabel}
-              className="group flex flex-row items-center justify-start gap-4 rounded-xl border border-border bg-card p-4 shadow-md transition-all hover:shadow-lg focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:aspect-square sm:flex-col sm:items-center sm:justify-center sm:gap-2"
-            >
-              <div className="flex h-10 w-10 shrink-0 items-center justify-center rounded-lg bg-primary/10 transition-colors group-hover:bg-primary/15 sm:h-10 sm:w-10">
-                <Icon className="h-5 w-5 text-primary" />
-              </div>
-              <div className="min-w-0 flex-1 text-left sm:w-full sm:flex-none sm:text-center">
-                <p className="break-words text-sm font-semibold text-foreground">{text}</p>
-                <p className="mt-0.5 text-xs text-muted-foreground">{subtext}</p>
-              </div>
-            </a>
-          ))}
-        </div>
-
-        <div className="mt-12 flex flex-col items-center gap-3">
-          <p className="text-center text-sm font-medium text-foreground sm:text-base">
-            La forma más rápida de comunicarte con nosotros
-          </p>
-          <a
-            href="https://wa.me/543382405621"
-            target="_blank"
-            rel="noopener noreferrer"
-            aria-label="Chatear por WhatsApp con Agridrop"
-            className="inline-flex w-full max-w-sm items-center justify-center gap-3 rounded-xl bg-primary px-6 py-3.5 text-base font-semibold text-primary-foreground shadow-lg transition-all hover:scale-[1.02] hover:bg-primary/90 hover:shadow-xl focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2 sm:w-auto sm:px-8 sm:py-4 sm:text-lg"
+      {/* ── HABLEMOS. block ────────────────────────────────────────────── */}
+      <div
+        style={{
+          position: "relative",
+          overflow: "hidden",
+          paddingTop: "5.5rem",
+          paddingBottom: "2rem",
+        }}
+      >
+        {/* HABLEMOS. — smaller, centered, above the contact row */}
+        <div
+          aria-hidden="true"
+          style={{
+            position: "absolute",
+            top: 0,
+            left: 0,
+            right: 0,
+            display: "flex",
+            justifyContent: "center",
+            overflow: "hidden",
+            pointerEvents: "none",
+            userSelect: "none",
+            paddingTop: "2rem",
+          }}
+        >
+          <span
+            className="display-heading"
+            style={{
+              fontSize: "clamp(4.5rem, 14vw, 11rem)",
+              color: "rgba(255,255,255,0.08)",
+              whiteSpace: "nowrap",
+              lineHeight: 1,
+            }}
           >
-            <MessageCircle className="h-5 w-5" strokeWidth={2} />
-            Chatear por WhatsApp
-          </a>
-          <p className="text-center text-sm text-muted-foreground">
-            Horario de atención: Lunes a Sábado de 8:00 a 19:00
-          </p>
+            HABLEMOS.
+          </span>
+        </div>
+
+        {/* Contact row — floats below HABLEMOS. */}
+        <div
+          className="mx-auto max-w-7xl px-6"
+          style={{ position: "relative", zIndex: 1, paddingTop: "clamp(5rem, 20vw, 10rem)" }}
+        >
+          <div
+            className="flex flex-col sm:flex-row"
+            style={{
+              borderTop: "1px solid var(--outline-variant)",
+              borderBottom: "1px solid var(--outline-variant)",
+            }}
+          >
+            {contactItems.map((item, i) => (
+              <a
+                key={item.label}
+                href={item.href}
+                target={item.href.startsWith("http") ? "_blank" : undefined}
+                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
+                className={`flex-1 flex flex-col justify-center group ${
+                  i < contactItems.length - 1
+                    ? "border-b border-white/10 sm:border-b-0 sm:border-r sm:border-white/10"
+                    : ""
+                }`}
+                style={{
+                  padding: "1.5rem",
+                  textDecoration: "none",
+                }}
+              >
+                <p
+                  className="label-style mb-2"
+                  style={{ color: "var(--primary)" }}
+                >
+                  {item.label}
+                </p>
+                <p
+                  className="group-hover:text-primary transition-colors duration-200"
+                  style={{
+                    color: "#ffffff",
+                    fontSize: "1rem",
+                    fontWeight: 600,
+                    lineHeight: 1.4,
+                  }}
+                >
+                  {item.value}
+                </p>
+                {item.sub && (
+                  <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.875rem", marginTop: "0.2rem" }}>
+                    {item.sub}
+                  </p>
+                )}
+              </a>
+            ))}
+          </div>
         </div>
       </div>
+
+      {/* ── WhatsApp CTA — full width ──────────────────────────────────── */}
+      <div className="mx-auto max-w-7xl px-6" style={{ paddingTop: "1.4rem", paddingBottom: "5.5rem" }}>
+        <a
+          href="https://wa.me/543382405621"
+          target="_blank"
+          rel="noopener noreferrer"
+          aria-label="Contactar por WhatsApp"
+          className="flex w-full items-center justify-center gap-3 transition-all duration-200"
+          style={{
+            border: "1px solid var(--primary)",
+            color: "var(--primary)",
+            backgroundColor: "transparent",
+            padding: "1.4rem",
+            fontWeight: 700,
+            letterSpacing: "0.1em",
+            textTransform: "uppercase",
+            fontSize: "0.8rem",
+            textDecoration: "none",
+          }}
+          onMouseEnter={(e) => {
+            e.currentTarget.style.backgroundColor = "var(--primary)"
+            e.currentTarget.style.color = "var(--on-primary)"
+          }}
+          onMouseLeave={(e) => {
+            e.currentTarget.style.backgroundColor = "transparent"
+            e.currentTarget.style.color = "var(--primary)"
+          }}
+        >
+          <MessageCircle className="h-5 w-5" strokeWidth={2} />
+          CONTACTAR VÍA WHATSAPP
+        </a>
+      </div>
+
     </section>
   )
 }

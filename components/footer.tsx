@@ -1,4 +1,4 @@
-import { Droplets } from "lucide-react"
+"use client"
 
 const footerLinks = [
   { label: "Inicio", href: "#inicio" },
@@ -9,32 +9,57 @@ const footerLinks = [
 
 export function Footer() {
   return (
-    <footer className="border-t border-border bg-foreground py-12">
+    <footer
+      style={{
+        backgroundColor: "var(--surface-container-low)",
+        borderTop: "0.5px solid rgba(110, 255, 192, 0.30)",
+        padding: "2.8rem 0",
+      }}
+    >
       <div className="mx-auto max-w-7xl px-6">
-        <div className="flex flex-col items-center gap-8 md:flex-row md:justify-between">
-          <a href="#inicio" className="flex items-center gap-2">
-            <Droplets className="h-6 w-6 text-primary" />
-            <span className="text-lg font-bold text-primary-foreground">
-              Agridrop
-            </span>
+        <div className="flex flex-col items-center gap-6 md:flex-row md:justify-between">
+          {/* Logo wordmark */}
+          <a
+            href="#inicio"
+            style={{
+              color: "var(--primary)",
+              fontWeight: 800,
+              fontSize: "1rem",
+              letterSpacing: "-0.02em",
+              textTransform: "uppercase",
+              textDecoration: "none",
+            }}
+          >
+             AGRIDROP
           </a>
 
-          <nav className="flex flex-wrap items-center justify-center gap-6" aria-label="Footer navigation">
+          {/* Nav links */}
+          <nav className="flex flex-wrap items-center justify-center gap-7" aria-label="Footer">
             {footerLinks.map((link) => (
               <a
                 key={link.href}
                 href={link.href}
-                className="text-sm text-primary-foreground/60 transition-colors hover:text-primary-foreground"
+                className="label-style transition-colors duration-200"
+                style={{
+                  color: "rgba(255,255,255,0.35)",
+                  textDecoration: "none",
+                }}
+                onMouseEnter={(e) => (e.currentTarget.style.color = "#ffffff")}
+                onMouseLeave={(e) =>
+                  (e.currentTarget.style.color = "rgba(255,255,255,0.35)")
+                }
               >
                 {link.label}
               </a>
             ))}
           </nav>
-        </div>
 
-        <div className="mt-8 border-t border-primary-foreground/10 pt-8 text-center">
-          <p className="text-sm text-primary-foreground/40">
-            {'2026 Agridrop. Todos los derechos reservados.'}
+          {/* Copyright */}
+          <p
+            className="label-style"
+            style={{ color: "rgba(255,255,255,0.25)", fontSize: "0.6rem" }}
+          >
+            © 2026 AGRIDROP
           </p>
         </div>
       </div>

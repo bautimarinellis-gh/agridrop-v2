@@ -1,15 +1,18 @@
 import type { Metadata } from 'next'
-import { Inter, Geist_Mono } from 'next/font/google'
+import { Barlow } from 'next/font/google'
 import './globals.css'
 import { Analytics } from "@vercel/analytics/next"
 
-const _inter = Inter({ subsets: ["latin"] });
-const _geistMono = Geist_Mono({ subsets: ["latin"] });
+const barlow = Barlow({
+  subsets: ['latin'],
+  weight: ['400', '600', '700', '800'],
+  variable: '--font-barlow',
+  display: 'swap',
+})
 
 export const metadata: Metadata = {
-  title: 'Agridrop - Soluciones Agrícolas del Futuro',
-  description: 'Potenciamos tu rendimiento con tecnología y sustentabilidad. Productos agrícolas de alta calidad para el campo moderno.',
-  generator: 'v0.app',
+  title: 'Agridrop - Tecnología Agrícola de Precisión',
+  description: 'Potenciamos tu campo con ingeniería biológica para el rendimiento máximo. Productos agrícolas de alta calidad.',
   icons: {
     icon: '/icon.svg',
     apple: '/icon.svg',
@@ -23,8 +26,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="es" className="scroll-smooth" suppressHydrationWarning>
-      <body className="font-sans antialiased" suppressHydrationWarning>
+      <body className={`${barlow.variable} font-sans antialiased`} suppressHydrationWarning>
         {children}
+        <div className="grain" aria-hidden="true" />
         <Analytics />
       </body>
     </html>

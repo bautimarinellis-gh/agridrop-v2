@@ -1,46 +1,153 @@
+"use client"
+
 import Image from "next/image"
 import { ArrowRight } from "lucide-react"
 
+const TICKER_TEXT = "DROP THOR · DROP FLOW · DROP ELIXIR · DROP QUALITY · DROP FORTE · "
+
 export function HeroSection() {
+  const repeated = TICKER_TEXT.repeat(6)
+
   return (
     <section
       id="inicio"
-      className="relative flex min-h-screen items-center justify-center overflow-hidden pt-20"
+      className="relative flex min-h-screen flex-col overflow-hidden"
     >
+      {/* Background image */}
       <Image
         src="/images/inicio-agridrop.jpg"
-        alt="Modern agriculture field with advanced technology"
+        alt="Campo agrícola con tecnología avanzada"
         fill
         className="object-cover"
         priority
+        quality={100}
+        sizes="100vw"
+        style={{ filter: "brightness(0.35)" }}
       />
-      <div className="absolute inset-0 bg-gradient-to-b from-black/70 via-black/50 to-black/70" />
 
-      <div className="relative z-10 mx-auto max-w-4xl px-6 pb-28 text-center">
-        <p className="mb-4 text-sm font-semibold uppercase tracking-widest text-primary-foreground/80">
-          Soluciones Agrícolas del Futuro
-        </p>
-        <h1 className="text-balance text-4xl font-bold leading-tight tracking-tight text-primary-foreground sm:text-5xl md:text-6xl lg:text-7xl">
-          Potenciamos tu rendimiento con tecnología y sustentabilidad
-        </h1>
-        <p className="mx-auto mt-6 max-w-2xl text-pretty text-lg leading-relaxed text-primary-foreground/80">
-          Desarrollamos productos innovadores que optimizan el crecimiento de tus
-          cultivos, respetando el medio ambiente y maximizando tu productividad.
-        </p>
-        <div className="mt-10 flex flex-col items-center justify-center gap-4 sm:flex-row">
-          <a
-            href="#productos"
-            className="inline-flex items-center gap-2 rounded-lg bg-primary px-8 py-3.5 text-base font-semibold text-primary-foreground shadow-lg transition-all hover:bg-primary/90 hover:shadow-xl"
+      {/* Radial vignette overlay */}
+      <div
+        className="absolute inset-0"
+        style={{
+          background:
+            "radial-gradient(ellipse at center, transparent 30%, var(--surface-dim) 100%)",
+        }}
+      />
+
+      {/* Content */}
+      <div className="relative z-10 flex flex-1 flex-col justify-end">
+        <div className="mx-auto w-full max-w-7xl px-6 pb-16 pt-36">
+          {/* Overline */}
+          <p
+            className="mb-5 label-style"
+            style={{ color: "var(--primary)" }}
           >
-            Explorar Productos
-            <ArrowRight className="h-5 w-5" />
-          </a>
-          <a
-            href="#nosotros"
-            className="inline-flex items-center gap-2 rounded-lg border-2 border-white bg-white/10 px-8 py-3.5 text-base font-semibold text-white backdrop-blur-sm transition-colors hover:bg-white/25"
+            TECNOLOGÍA AGRÍCOLA DE PRECISIÓN
+          </p>
+
+          {/* Headline */}
+          <h1
+            className="mb-6 display-heading"
+            style={{
+              fontSize: "clamp(2.5rem, 11vw, 10rem)",
+              lineHeight: 0.9,
+              letterSpacing: "-0.04em",
+            }}
           >
-            Conoce Más
-          </a>
+            <span className="block" style={{ color: "#ffffff" }}>
+              POTENCIAMOS
+            </span>
+            <span
+              className="block"
+              style={{
+                color: "transparent",
+                WebkitTextStroke: "1px rgba(255,255,255,0.3)",
+              }}
+            >
+              TU CAMPO.
+            </span>
+          </h1>
+
+          {/* Subtext */}
+          <p
+            className="mb-10 max-w-xl"
+            style={{
+              color: "rgba(255,255,255,0.55)",
+              fontSize: "1rem",
+              lineHeight: 1.6,
+            }}
+          >
+            Desarrollamos bioestimulantes y coadyuvantes de alta precisión
+            diseñados para maximizar cada gota aplicada.
+          </p>
+
+          {/* CTAs */}
+          <div className="flex flex-wrap items-center gap-4">
+            <a
+              href="#productos"
+              className="inline-flex items-center gap-2 transition-all duration-200 hover:opacity-90"
+              style={{
+                background:
+                  "linear-gradient(135deg, var(--primary), var(--primary-container))",
+                color: "var(--on-primary)",
+                padding: "0.7rem 1.8rem",
+                fontWeight: 700,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                fontSize: "0.75rem",
+                boxShadow: "0 40px 80px rgba(0, 226, 158, 0.06)",
+              }}
+            >
+              EXPLORAR PRODUCTOS
+              <ArrowRight className="h-4 w-4" />
+            </a>
+            <a
+              href="#nosotros"
+              className="inline-flex items-center gap-2 transition-all duration-200"
+              style={{
+                border: "1px solid rgba(255,255,255,0.2)",
+                color: "#ffffff",
+                padding: "0.7rem 1.8rem",
+                fontWeight: 600,
+                letterSpacing: "0.1em",
+                textTransform: "uppercase",
+                fontSize: "0.75rem",
+              }}
+              onMouseEnter={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.7)"
+              }}
+              onMouseLeave={(e) => {
+                e.currentTarget.style.borderColor = "rgba(255,255,255,0.2)"
+              }}
+            >
+              CONOCE MÁS
+            </a>
+          </div>
+        </div>
+
+        {/* Marquee ticker */}
+        <div
+          className="relative w-full overflow-hidden py-3"
+          style={{
+            borderTop: "1px solid rgba(255,255,255,0.06)",
+            borderBottom: "1px solid rgba(255,255,255,0.06)",
+          }}
+        >
+          <div className="marquee-track">
+            <span
+              className="label-style whitespace-nowrap px-4"
+              style={{ color: "rgba(255,255,255,0.2)" }}
+            >
+              {repeated}
+            </span>
+            <span
+              className="label-style whitespace-nowrap px-4"
+              style={{ color: "rgba(255,255,255,0.2)" }}
+              aria-hidden="true"
+            >
+              {repeated}
+            </span>
+          </div>
         </div>
       </div>
     </section>

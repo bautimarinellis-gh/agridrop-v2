@@ -1,74 +1,115 @@
-import Image from "next/image"
-import { Leaf, Lightbulb, Users } from "lucide-react"
-
-const values = [
-  {
-    icon: Lightbulb,
-    title: "Innovación",
-    description:
-      "Investigamos y desarrollamos fórmulas de vanguardia para ofrecer soluciones que realmente marcan la diferencia en el campo.",
-  },
-  {
-    icon: Leaf,
-    title: "Sustentabilidad",
-    description:
-      "Nuestros productos respetan el equilibrio natural del suelo y el ecosistema, promoviendo una agricultura responsable.",
-  },
-  {
-    icon: Users,
-    title: "Alianza con el Productor",
-    description:
-      "Trabajamos codo a codo con los agricultores para entender sus necesidades y brindar acompanamiento tecnico personalizado.",
-  },
+const stats = [
+  { value: "48%", label: "Concentración Activa" },
+  { value: "ISO 9001", label: "Calidad Certificada" },
+  { value: "5 LÍNEAS", label: "Completa Portfolio" },
 ]
 
 export function AboutSection() {
   return (
-    <section id="nosotros" className="bg-background py-24 lg:py-32">
-      <div className="mx-auto max-w-7xl px-6">
-        <div className="grid items-center gap-16 lg:grid-cols-2">
-          <div>
-            <p className="mb-3 text-sm font-semibold uppercase tracking-widest text-primary">
-              Nosotros
-            </p>
-            <h2 className="text-balance text-3xl font-bold tracking-tight text-foreground sm:text-4xl">
-              Comprometidos con el futuro del agro
-            </h2>
-            <p className="mt-6 text-pretty text-lg leading-relaxed text-muted-foreground">
-              En Agridrop, creemos que la agricultura del futuro se construye hoy.
-              Desde nuestra fundación, hemos apostado por la innovación, la
-              investigación científica y el respeto por la naturaleza para
-              desarrollar productos que potencien el rendimiento de los cultivos de
-              manera sustentable.
+    <section
+      id="nosotros"
+      className="relative overflow-hidden py-20 lg:py-40"
+      style={{
+        backgroundColor: "var(--surface-container-low)",
+      }}
+    >
+      <div className="relative mx-auto max-w-7xl px-6">
+        <div className="flex items-stretch gap-0">
+
+          {/* Left col — AGRIDROP vertical decorative text */}
+          <div
+            aria-hidden="true"
+            className="hidden lg:flex flex-shrink-0 items-center justify-center pointer-events-none select-none"
+            style={{ width: "120px", marginRight: "5rem" }}
+          >
+            <span
+              style={{
+                color: "rgba(255,255,255,0.07)",
+                fontWeight: 800,
+                fontSize: "10rem",
+                letterSpacing: "-0.04em",
+                textTransform: "uppercase",
+                writingMode: "vertical-rl",
+                transform: "rotate(180deg)",
+                lineHeight: 1,
+                whiteSpace: "nowrap",
+              }}
+            >
+              AGRIDROP
+            </span>
+          </div>
+
+          {/* Right col — content */}
+          <div className="flex-1">
+            {/* Overline */}
+            <p className="mb-6 label-style" style={{ color: "var(--primary)" }}>
+              ● NOSOTROS
             </p>
 
-            <div className="mt-12 flex flex-col gap-8">
-              {values.map((value) => (
-                <div key={value.title} className="flex gap-4">
-                  <div className="flex h-12 w-12 shrink-0 items-center justify-center rounded-lg bg-primary shadow-md">
-                    <value.icon className="h-6 w-6 text-primary-foreground" />
-                  </div>
-                  <div>
-                    <h3 className="text-base font-semibold text-foreground">
-                      {value.title}
-                    </h3>
-                    <p className="mt-1 text-sm leading-relaxed text-muted-foreground">
-                      {value.description}
-                    </p>
-                  </div>
+            {/* Headline */}
+            <h2
+              className="display-heading mb-8"
+              style={{
+                fontSize: "clamp(2.4rem, 6vw, 4.5rem)",
+                lineHeight: 0.95,
+              }}
+            >
+              <span className="block" style={{ color: "#ffffff" }}>
+                INGENIERÍA BIOLÓGICA PARA
+              </span>
+              <span className="block" style={{ color: "var(--primary)" }}>
+                EL RENDIMIENTO MÁXIMO.
+              </span>
+            </h2>
+
+            {/* Body paragraph */}
+            <p
+              className="mb-14 max-w-2xl"
+              style={{ color: "rgba(255,255,255,0.6)", lineHeight: 1.7, fontSize: "1.05rem" }}
+            >
+              Desarrollamos bioestimulantes y fertilizantes de alta tecnología
+              diseñados bajo estándares industriales únicos. Nuestra misión es
+              optimizar cada gota aplicada, reduciendo el impacto ambiental y
+              maximizando la rentabilidad del productor agrícola moderno.
+            </p>
+
+            {/* Stats row */}
+            <div
+              className="mb-16 flex flex-wrap"
+              style={{
+                borderTop: "1px solid var(--outline-variant)",
+                borderBottom: "1px solid var(--outline-variant)",
+              }}
+            >
+              {stats.map((stat, i) => (
+                <div
+                  key={stat.value}
+                  className="flex flex-col justify-center py-8"
+                  style={{
+                    flex: "1 1 0",
+                    minWidth: "100px",
+                    paddingRight: "1.5rem",
+                    borderRight:
+                      i < stats.length - 1 ? "1px solid var(--outline-variant)" : "none",
+                    paddingLeft: i > 0 ? "1.5rem" : 0,
+                  }}
+                >
+                  <span
+                    className="display-heading"
+                    style={{ fontSize: "clamp(2rem, 4vw, 2.8rem)", color: "#ffffff" }}
+                  >
+                    {stat.value}
+                  </span>
+                  <span
+                    className="label-style mt-2"
+                    style={{ color: "rgba(255,255,255,0.4)" }}
+                  >
+                    {stat.label}
+                  </span>
                 </div>
               ))}
             </div>
-          </div>
 
-          <div className="relative overflow-hidden rounded-2xl">
-            <Image
-              src="/images/nosotros-agridrop.jpg"
-              alt="Equipo de Agridrop trabajando en el campo"
-              width={640}
-              height={480}
-              className="h-full w-full object-cover"
-            />
           </div>
         </div>
       </div>
