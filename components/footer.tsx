@@ -30,7 +30,7 @@ export function Footer() {
               textDecoration: "none",
             }}
           >
-             AGRIDROP
+            AGRIDROP
           </a>
 
           {/* Nav links */}

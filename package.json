@@ -4,7 +4,13 @@
   "private": true,
   "packageManager": "pnpm@10.30.1",
   "pnpm": {
-    "onlyBuiltDependencies": ["sharp"]
+    "onlyBuiltDependencies": [
+      "sharp"
+    ],
+    "overrides": {
+      "@types/react": "~18.2.0",
+      "@types/react-dom": "~18.2.0"
+    }
   },
   "scripts": {
     "dev": "next dev",
@@ -66,8 +72,8 @@
   "devDependencies": {
     "@tailwindcss/postcss": "^4.2.0",
     "@types/node": "^22",
-    "@types/react": "19.2.14",
-    "@types/react-dom": "19.2.3",
+    "@types/react": "18.3.28",
+    "@types/react-dom": "18.3.7",
     "postcss": "^8.5",
     "tailwindcss": "^4.2.0",
     "tw-animate-css": "1.3.3",
