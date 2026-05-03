@@ -1,7 +1,15 @@
 "use client"
 
 import { useState } from "react"
-import { CheckCircle2, X } from "lucide-react"
+import {
+  Beaker,
+  Blend,
+  CheckCircle2,
+  Droplets,
+  FlaskConical,
+  Sprout,
+  X,
+} from "lucide-react"
 import {
   Dialog,
   DialogClose,
@@ -10,34 +18,36 @@ import {
   DialogTitle,
 } from "@/components/ui/dialog"
 
-/* ── Product SVG icons ───────────────────────────────────────────────────── */
+/* ── Product icons: Lucide, trazo grueso para leer bien en badges pequeños ── */
+const productIconAttrs = {
+  "aria-hidden": true as const,
+  className: "h-7 w-7 shrink-0 text-white pointer-events-none",
+  strokeWidth: 2.25,
+}
+
+/** Bioestimulante — germinación / vigor vegetal */
 const IconForte = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M12 2C9.5 6 7 8.5 7 12c0 2.76 2.24 5 5 5s5-2.24 5-5c0-3.5-2.5-6-5-10z" fill="white" opacity="0.9"/>
-    <path d="M12 9c0 0-2 2.5-2 4a2 2 0 0 0 4 0c0-1.5-2-4-2-4z" fill="white" opacity="0.45"/>
-  </svg>
+  <Sprout {...productIconAttrs} strokeLinecap="round" strokeLinejoin="round" />
 )
+
+/** Coadyuvante humectante-adherente — cubrimiento foliar por gotas */
 const IconThor = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M13 2L4.5 13.5H11L10 22L19.5 10.5H13L13 2Z" fill="white" opacity="0.9"/>
-  </svg>
+  <Droplets {...productIconAttrs} strokeLinecap="round" strokeLinejoin="round" />
 )
+
+/** Compatibilizante — mezcla estable en el tanque */
 const IconFlow = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M17 8C8 10 5.9 16.17 3.82 21.34L5.71 22l1-2.3A4.49 4.49 0 0 0 8 20c4 0 4-2 8-2s4 2 8 2v-2c-4 0-4-2-8-2-1.13 0-1.9.16-2.53.33C14.28 12.14 16 10.41 17 8z" fill="white" opacity="0.9"/>
-    <circle cx="6.5" cy="8.5" r="1.5" fill="white" opacity="0.55"/>
-  </svg>
+  <Blend {...productIconAttrs} strokeLinecap="round" strokeLinejoin="round" />
 )
+
+/** MSO / microemulsión — formulación líquida de laboratorio */
 const IconElixir = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M12 2L6 10.5C6 14.09 8.69 17 12 17s6-2.91 6-6.5L12 2z" fill="white" opacity="0.9"/>
-    <path d="M9 13c.55 1.76 2.45 2 3 2" stroke="white" strokeWidth="1.2" strokeLinecap="round" opacity="0.45"/>
-  </svg>
+  <FlaskConical {...productIconAttrs} strokeLinecap="round" strokeLinejoin="round" />
 )
+
+/** Corrector de agua / secuestre — tratamiento del caldo */
 const IconQuality = () => (
-  <svg width="24" height="24" viewBox="0 0 24 24" fill="none">
-    <path d="M12 2L9.5 8.5H3L8.5 12.5L6.5 19L12 15L17.5 19L15.5 12.5L21 8.5H14.5L12 2Z" fill="white" opacity="0.9"/>
-  </svg>
+  <Beaker {...productIconAttrs} strokeLinecap="round" strokeLinejoin="round" />
 )
 
 type Product = {
