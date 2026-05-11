@@ -5,6 +5,7 @@ import {
   Beaker,
   Blend,
   CheckCircle2,
+  Download,
   Droplets,
   FlaskConical,
   Sprout,
@@ -55,6 +56,7 @@ type Product = {
   icon: React.ReactNode
   categoryShort: string
   colorHex: string
+  tagline: string
   description: string
   highlights: string[]
   benefits: string[]
@@ -67,47 +69,57 @@ const products: Product[] = [
   {
     name: "DROP FORTE",
     icon: <IconForte />,
-    categoryShort: "Bioestimulante",
+    categoryShort: "Fertilizante Foliar · Bioestimulante",
     colorHex: "#ff6b2b",
-    description: "Bioestimulante de alta concentración que fortalece la estructura celular, incrementando la resistencia del cultivo al estrés.",
-    highlights: [],
-    benefits: ["Alta concentración", "Estimulación celular"],
-    dose: null,
-    presentation: null,
-    brochureUrl: null,
+    tagline: "Bioestimulante foliar que activa defensas, estimula el crecimiento y aumenta el rendimiento.",
+    description: "Fertilizante foliar bioestimulante formulado a base de metabolitos secundarios de fermentaciones específicas, micronutrientes quelatados, fitohormonas naturales (isómeros específicos post hidrólisis enzimática), laminados de algas y extractos vegetales. Activa mecanismos de defensa, estimula el desarrollo vegetal y aumenta el rendimiento.",
+    highlights: [
+      "Activa mecanismos de defensa naturales del cultivo",
+      "Estimula el crecimiento y desarrollo",
+      "Mejora la sanidad vegetal",
+      "Aumenta el rendimiento y la calidad",
+      "Ensayos INTA: +338 kg/ha en maíz · +214 kg/ha en soja",
+    ],
+    benefits: ["Avales INTA", "ISO 9001 · 14001"],
+    dose: "100 cc / 800 ppm de dureza en 100 L",
+    presentation: "Caja con 15 botellas de 1 L c/u.",
+    brochureUrl: "/folletos/forte_folleto.pdf",
   },
   {
     name: "DROP THOR",
     icon: <IconThor />,
     categoryShort: "Coadyuvante · Humectante · Adherente",
     colorHex: "#22c55e",
-    description: "Coadyuvante con 48% de principio activo. Mejora la cobertura y contacto de agroquímicos sobre la superficie foliar.",
+    tagline: "Coadyuvante humectante-adherente con 48% de principio activo para máxima cobertura foliar.",
+    description: "Coadyuvante humectante, adherente y biodegradable de concentrado soluble. Formulado a base de alcohol lineal etoxilado de alta cadena de carbono y silicona. Excelente tensioactivo que mejora la cobertura y contacto de agroquímicos sobre la superficie foliar. Concentración del 48% de principio activo, muy por encima de la media del mercado.",
     highlights: [
       "Humectante, penetrante y adherente",
-      "Tensión superficial dinámica de 40–45 dinas al impacto",
-      "Tecnología antiespumante",
-      "Ecológico y biodegradable",
+      "Tensión superficial dinámica de 40–45 dinas al impacto de la gota, asegurando rápida distribución foliar",
+      "Cobertura uniforme sobre la superficie foliar — tecnología antiespumante",
+      "Ecológico, biodegradable — contiene componentes siliconados",
     ],
-    benefits: ["48% Act. Activo", "Biodegradable"],
+    benefits: ["48% Princ. Activo", "Biodegradable"],
     dose: "25–50 cc / 100 L",
-    presentation: "15 botellas de 1 L c/u.",
-    brochureUrl: "/folletos/thor_folleto.pdf",
+    presentation: "Caja con 15 botellas de 1 L c/u.",
+    brochureUrl: "/folletos/drop_folleto.pdf",
   },
   {
     name: "DROP FLOW",
     icon: <IconFlow />,
     categoryShort: "Coadyuvante · Compatibilizante",
     colorHex: "#06b6d4",
-    description: "Compatibiliza caldos de aplicación. Mantiene la estabilidad de mezclas de fitosanitarios en el tanque. Ideal para drones.",
+    tagline: "Compatibilizante que estabiliza mezclas de fitosanitarios en el tanque. Ideal para drones.",
+    description: "Coadyuvante preventivo que compatibiliza caldos de aplicación. Compuesto por mezclas de emulsionantes que mantienen la estabilidad de herbicidas, fungicidas, insecticidas y fertilizantes foliares en el tanque. Ideal para aplicaciones con drones y pulverizaciones de bajo volumen. Evita cortes de mezcla e incrustaciones en la pulverizadora.",
     highlights: [
-      "Compatibilizante, dispersante y emulsionante",
-      "No alcalinizante: no modifica el pH",
-      "Evita cortes de mezcla",
-      "Recomendado para drones y bajo volumen",
+      "Excelente capacidad estabilizante en combinaciones estratégicas de herbicidas",
+      "Permite obtener mezclas totalmente estables — evita costos por descarte o ineficacia",
+      "Reduce el riesgo de incrustaciones de productos en la pulverizadora",
+      "No alcalinizante: no modifica el pH ni afecta la residualidad de productos",
+      "Recomendado para drones y aviones de bajo volumen (~10 L/ha)",
     ],
     benefits: ["No modifica pH", "Apto drones"],
     dose: "200–400 ml/ha",
-    presentation: "Bidón de 10 L.",
+    presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/flow_folleto.pdf",
   },
   {
@@ -115,32 +127,41 @@ const products: Product[] = [
     icon: <IconElixir />,
     categoryShort: "Coadyuvante · MSO · Microemulsión",
     colorHex: "#d4a017",
-    description: "Aceite vegetal modificado (MSO) que disuelve la pared cuticular. Maximiza penetración y translocación. Óptimo en altas temperaturas.",
+    tagline: "MSO en microemulsión que maximiza la penetración y translocación de agroquímicos.",
+    description: "Coadyuvante MSO que forma una microemulsión estable sin separación de fases. El aceite vegetal modificado disuelve la pared cuticular mientras la organosilicona brinda gran afinidad de las gotas con la cera cuticular. Optimiza el mojado, maximiza penetración y translocación, y mejora el control de malezas difíciles o estresadas.",
     highlights: [
+      "Microemulsión estable: mezcla sin separación de fases",
       "Maximiza el tándem penetración–translocación",
-      "Reduce evaporación y riesgo de lavado por lluvia",
-      "Mayor control de malezas estresadas",
-      "Excelente capacidad de esparcimiento",
+      "Reduce la evaporación — mayor viscosidad por cantidad de micelas por gota",
+      "Óptima tensión superficial dinámica al momento del impacto de la gota",
+      "Garantiza mayor velocidad e incremento en el porcentaje de control",
+      "Hace más eficientes las aplicaciones con bajo volumen",
+      "Disminuye el riesgo de lavado por lluvia",
+      "Aumenta la eficiencia en malezas estresadas o difíciles",
+      "Eficaz en condiciones de baja humedad relativa",
+      "Máxima penetración — excelente capacidad de esparcimiento sobre el blanco",
     ],
     benefits: ["Penetración MSO", "Anti-evaporación"],
     dose: "200–400 ml/ha",
-    presentation: "Bidón de 10 L.",
+    presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/elixir_folleto.pdf",
   },
   {
     name: "DROP QUALITY",
     icon: <IconQuality />,
-    categoryShort: "Corrector de Aguas · Secuestrante",
+    categoryShort: "Corrector de pH · Buffer · Secuestrante",
     colorHex: "#a855f7",
-    description: "Corrector de pH con el mayor poder secuestrante del mercado. Corrige el pH al rango ideal 4.5–6.5 para fitosanitarios.",
+    tagline: "Corrector de pH y secuestrante catiónico para optimizar el agua de aplicación.",
+    description: "Corrector de pH con poder buffer y secuestrante catiónico. Tecnología superior que garantiza alta calidad de formulación: corrige el agua según su dureza y asegura un pH final de 4,5 a 6,5 — el rango óptimo para la mayoría de los fitosanitarios. Mejora las condiciones de aplicación de productos agroquímicos.",
     highlights: [
-      "Mayor poder secuestrante del mercado",
-      "Forma quelatos con cationes",
-      "Sin acidificantes que generen precipitados",
-      "No modifica el pH del caldo",
+      "Excelente poder buffer que mejora las condiciones de aplicación de agroquímicos",
+      "Mayor poder secuestrante del mercado (700/800 ppm CaCO₃ y Mg)",
+      "Forma quelatos con cationes, evitando precipitación del material secuestrado",
+      "Sin acidificantes que generen precipitados o insolubilización de principios activos",
+      "No modifica el pH del caldo de aplicación — cada fitosanitario trabaja en su rango óptimo",
     ],
-    benefits: ["pH 4.5–6.5", "Max. secuestrante"],
-    dose: "100 cc / 800 ppm",
+    benefits: ["pH 4.5–6.5", "Máx. secuestrante"],
+    dose: "100 cc / 800 ppm de dureza en 100 L · mín. 25 cc/100 L en aguas <200 ppm",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/quality_folleto.pdf",
   },
@@ -315,6 +336,37 @@ export function ProductsSection() {
                     )}
                   </div>
                 )}
+
+                {/* Botón descarga folleto */}
+                {selectedProduct.brochureUrl && (
+                  <div style={{ paddingTop: "0.5rem", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                    <a
+                      href={selectedProduct.brochureUrl}
+                      download={getBrochureFilename(selectedProduct.name)}
+                      className="label-style inline-flex items-center gap-2 transition-all duration-200"
+                      style={{
+                        border: `1px solid ${selectedProduct.colorHex}`,
+                        color: selectedProduct.colorHex,
+                        padding: "0.55rem 1.2rem",
+                        fontSize: "0.62rem",
+                        textDecoration: "none",
+                      }}
+                      onMouseEnter={(e) => {
+                        const el = e.currentTarget
+                        el.style.backgroundColor = selectedProduct.colorHex
+                        el.style.color = "#000"
+                      }}
+                      onMouseLeave={(e) => {
+                        const el = e.currentTarget
+                        el.style.backgroundColor = "transparent"
+                        el.style.color = selectedProduct.colorHex
+                      }}
+                    >
+                      <Download className="h-3.5 w-3.5 shrink-0" />
+                      DESCARGAR FOLLETO TÉCNICO
+                    </a>
+                  </div>
+                )}
               </div>
             </>
           )}
@@ -365,7 +417,7 @@ function ProductRow({ product, onSelect }: { product: Product; onSelect: () => v
           {product.name}
         </h3>
         <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.85rem", lineHeight: 1.55, maxWidth: "52ch" }}>
-          {product.description}
+          {product.tagline}
         </p>
       </div>
 
