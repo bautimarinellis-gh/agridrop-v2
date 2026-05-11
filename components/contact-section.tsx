@@ -11,9 +11,9 @@ const contactItems = [
   },
   {
     label: "E-MAIL",
-    value: "quintales.marinelli@gmail.com",
+    value: "contacto.agridrop@gmail.com",
     sub: null,
-    href: "quintales.marinelli@gmail.com",
+    href: "contacto.agridrop@gmail.com",
   },
   {
     label: "COMERCIAL",
