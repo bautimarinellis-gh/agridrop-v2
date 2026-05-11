@@ -1,6 +1,7 @@
 "use client"
 
 import { useState } from "react"
+import Image from "next/image"
 import {
   Beaker,
   Blend,
@@ -63,6 +64,7 @@ type Product = {
   dose: string | null
   presentation: string | null
   brochureUrl: string | null
+  imageUrl: string
 }
 
 const products: Product[] = [
@@ -84,6 +86,7 @@ const products: Product[] = [
     dose: "100 cc / 800 ppm de dureza en 100 L",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/forte_folleto.pdf",
+    imageUrl: "/imagenes_productos/forte_bidon.png",
   },
   {
     name: "DROP THOR",
@@ -102,6 +105,7 @@ const products: Product[] = [
     dose: "25–50 cc / 100 L",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/drop_folleto.pdf",
+    imageUrl: "/imagenes_productos/thor_botella.png",
   },
   {
     name: "DROP FLOW",
@@ -121,6 +125,7 @@ const products: Product[] = [
     dose: "200–400 ml/ha",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/flow_folleto.pdf",
+    imageUrl: "/imagenes_productos/flow_bidon.png",
   },
   {
     name: "DROP ELIXIR",
@@ -145,6 +150,7 @@ const products: Product[] = [
     dose: "200–400 ml/ha",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/elixir_folleto.pdf",
+    imageUrl: "/imagenes_productos/elixir_bidon.png",
   },
   {
     name: "DROP QUALITY",
@@ -164,6 +170,7 @@ const products: Product[] = [
     dose: "100 cc / 800 ppm de dureza en 100 L · mín. 25 cc/100 L en aguas <200 ppm",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/quality_folleto.pdf",
+    imageUrl: "/imagenes_productos/quality_botella.png",
   },
 ]
 
@@ -217,14 +224,14 @@ export function ProductsSection() {
             border: `1px solid ${selectedProduct?.colorHex ?? "var(--outline-variant)"}`,
             borderRadius: 0,
             color: "#e8f0ec",
-            width: "min(92vw, 720px)",
+            width: "min(92vw, 860px)",
             maxWidth: "none",
           }}
         >
           {selectedProduct && (
             <>
               <DialogHeader>
-                {/* Color accent bar at top — sin X solapada */}
+                {/* Color accent bar */}
                 <div
                   className="dialog-color-bar"
                   style={{
@@ -258,8 +265,6 @@ export function ProductsSection() {
                       {selectedProduct.categoryShort}
                     </p>
                   </div>
-
-                  {/* Botón cerrar — alineado con el header, sin solapar la barra */}
                   <DialogClose
                     className="shrink-0 flex items-center justify-center transition-opacity hover:opacity-100 opacity-60 focus:outline-none"
                     style={{ color: "rgba(255,255,255,0.7)" }}
@@ -270,108 +275,160 @@ export function ProductsSection() {
                 </div>
               </DialogHeader>
 
-              <div style={{ marginTop: "2rem", display: "flex", flexDirection: "column", gap: "1.8rem" }}>
-
-                {/* Descripción */}
-                <div>
-                  <p className="label-style mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>
-                    Descripción
-                  </p>
-                  <p style={{ fontSize: "1rem", lineHeight: 1.7, color: "#e8f0ec" }}>
-                    {selectedProduct.description}
-                  </p>
+              {/* Two-column body: image left, content right */}
+              <div
+                className="flex flex-col sm:flex-row gap-6"
+                style={{ marginTop: "2rem" }}
+              >
+                {/* Imagen del envase */}
+                <div
+                  className="relative shrink-0 self-start"
+                  style={{
+                    width: "100%",
+                    maxWidth: "260px",
+                    height: "300px",
+                    backgroundColor: "var(--surface-container)",
+                    margin: "0 auto",
+                  }}
+                >
+                  <Image
+                    src={selectedProduct.imageUrl}
+                    alt={`Envase ${selectedProduct.name}`}
+                    fill
+                    style={{ objectFit: "contain", objectPosition: "center" }}
+                    sizes="260px"
+                  />
+                  {/* Vignette radial: disuelve el fondo blanco en el bg oscuro */}
+                  <div
+                    aria-hidden
+                    style={{
+                      position: "absolute",
+                      inset: 0,
+                      background: `radial-gradient(ellipse at center, transparent 38%, var(--surface-container) 78%)`,
+                      pointerEvents: "none",
+                    }}
+                  />
                 </div>
 
-                {/* Características */}
-                {selectedProduct.highlights.length > 0 && (
+                {/* Contenido textual */}
+                <div className="flex-1 flex flex-col" style={{ gap: "1.8rem" }}>
+
+                  {/* Descripción */}
                   <div>
                     <p className="label-style mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>
-                      Características
+                      Descripción
                     </p>
-                    <ul style={{ display: "flex", flexDirection: "column", gap: "0.75rem" }}>
-                      {selectedProduct.highlights.map((h) => (
-                        <li key={h} className="flex items-start gap-3" style={{ fontSize: "0.95rem", color: "#e8f0ec" }}>
-                          <CheckCircle2
-                            className="shrink-0"
-                            style={{ color: selectedProduct.colorHex, marginTop: "2px", width: "16px", height: "16px" }}
-                          />
-                          {h}
-                        </li>
-                      ))}
-                    </ul>
+                    <p style={{ fontSize: "0.95rem", lineHeight: 1.7, color: "#e8f0ec" }}>
+                      {selectedProduct.description}
+                    </p>
                   </div>
-                )}
 
-                {/* Dosis + Presentación */}
-                {(selectedProduct.dose || selectedProduct.presentation) && (
-                  <div
-                    style={{
-                      backgroundColor: `${selectedProduct.colorHex}12`,
-                      border: `1px solid ${selectedProduct.colorHex}35`,
-                      padding: "1.5rem",
-                      display: "flex",
-                      gap: "2.5rem",
-                      flexWrap: "wrap",
-                    }}
-                  >
-                    {selectedProduct.dose && (
-                      <div>
-                        <p className="label-style mb-1.5" style={{ color: "rgba(255,255,255,0.4)" }}>
-                          Dosis recomendada
-                        </p>
-                        <p style={{ fontSize: "1rem", fontWeight: 700, color: "#e8f0ec" }}>
-                          {selectedProduct.dose}
-                        </p>
-                      </div>
-                    )}
-                    {selectedProduct.presentation && (
-                      <div>
-                        <p className="label-style mb-1.5" style={{ color: "rgba(255,255,255,0.4)" }}>
-                          Presentación
-                        </p>
-                        <p style={{ fontSize: "1rem", fontWeight: 700, color: "#e8f0ec" }}>
-                          {selectedProduct.presentation}
-                        </p>
-                      </div>
-                    )}
-                  </div>
-                )}
+                  {/* Características */}
+                  {selectedProduct.highlights.length > 0 && (
+                    <div>
+                      <p className="label-style mb-3" style={{ color: "rgba(255,255,255,0.4)" }}>
+                        Características
+                      </p>
+                      <ul style={{ display: "flex", flexDirection: "column", gap: "0.65rem" }}>
+                        {selectedProduct.highlights.map((h) => (
+                          <li key={h} className="flex items-start gap-3" style={{ fontSize: "0.88rem", color: "#e8f0ec" }}>
+                            <CheckCircle2
+                              className="shrink-0"
+                              style={{ color: selectedProduct.colorHex, marginTop: "2px", width: "15px", height: "15px" }}
+                            />
+                            {h}
+                          </li>
+                        ))}
+                      </ul>
+                    </div>
+                  )}
 
-                {/* Botón descarga folleto */}
-                {selectedProduct.brochureUrl && (
-                  <div style={{ paddingTop: "0.5rem", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-                    <a
-                      href={selectedProduct.brochureUrl}
-                      download={getBrochureFilename(selectedProduct.name)}
-                      className="label-style inline-flex items-center gap-2 transition-all duration-200"
+                  {/* Dosis + Presentación */}
+                  {(selectedProduct.dose || selectedProduct.presentation) && (
+                    <div
                       style={{
-                        border: `1px solid ${selectedProduct.colorHex}`,
-                        color: selectedProduct.colorHex,
-                        padding: "0.55rem 1.2rem",
-                        fontSize: "0.62rem",
-                        textDecoration: "none",
-                      }}
-                      onMouseEnter={(e) => {
-                        const el = e.currentTarget
-                        el.style.backgroundColor = selectedProduct.colorHex
-                        el.style.color = "#000"
-                      }}
-                      onMouseLeave={(e) => {
-                        const el = e.currentTarget
-                        el.style.backgroundColor = "transparent"
-                        el.style.color = selectedProduct.colorHex
+                        backgroundColor: `${selectedProduct.colorHex}12`,
+                        border: `1px solid ${selectedProduct.colorHex}35`,
+                        padding: "1.25rem",
+                        display: "flex",
+                        gap: "2rem",
+                        flexWrap: "wrap",
                       }}
                     >
-                      <Download className="h-3.5 w-3.5 shrink-0" />
-                      DESCARGAR FOLLETO TÉCNICO
-                    </a>
-                  </div>
-                )}
+                      {selectedProduct.dose && (
+                        <div>
+                          <p className="label-style mb-1.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+                            Dosis recomendada
+                          </p>
+                          <p style={{ fontSize: "0.95rem", fontWeight: 700, color: "#e8f0ec" }}>
+                            {selectedProduct.dose}
+                          </p>
+                        </div>
+                      )}
+                      {selectedProduct.presentation && (
+                        <div>
+                          <p className="label-style mb-1.5" style={{ color: "rgba(255,255,255,0.4)" }}>
+                            Presentación
+                          </p>
+                          <p style={{ fontSize: "0.95rem", fontWeight: 700, color: "#e8f0ec" }}>
+                            {selectedProduct.presentation}
+                          </p>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {/* Botón descarga folleto */}
+                  {selectedProduct.brochureUrl && (
+                    <div style={{ paddingTop: "0.25rem", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
+                      <a
+                        href={selectedProduct.brochureUrl}
+                        download={getBrochureFilename(selectedProduct.name)}
+                        className="label-style inline-flex items-center gap-2 transition-all duration-200"
+                        style={{
+                          border: `1px solid ${selectedProduct.colorHex}`,
+                          color: selectedProduct.colorHex,
+                          padding: "0.55rem 1.2rem",
+                          fontSize: "0.62rem",
+                          textDecoration: "none",
+                        }}
+                        onMouseEnter={(e) => {
+                          const el = e.currentTarget
+                          el.style.backgroundColor = selectedProduct.colorHex
+                          el.style.color = "#000"
+                        }}
+                        onMouseLeave={(e) => {
+                          const el = e.currentTarget
+                          el.style.backgroundColor = "transparent"
+                          el.style.color = selectedProduct.colorHex
+                        }}
+                      >
+                        <Download className="h-3.5 w-3.5 shrink-0" />
+                        DESCARGAR FOLLETO TÉCNICO
+                      </a>
+                    </div>
+                  )}
+                </div>
               </div>
             </>
           )}
         </DialogContent>
       </Dialog>
+
+      {/* Precarga silenciosa de imágenes en tamaño popup */}
+      <div aria-hidden style={{ position: "absolute", width: 0, height: 0, overflow: "hidden", opacity: 0, pointerEvents: "none" }}>
+        {products.map((p) => (
+          <Image
+            key={p.name}
+            src={p.imageUrl}
+            alt=""
+            width={260}
+            height={300}
+            priority
+            sizes="260px"
+          />
+        ))}
+      </div>
     </section>
   )
 }
@@ -391,18 +448,26 @@ function ProductRow({ product, onSelect }: { product: Product; onSelect: () => v
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Icon badge */}
+      {/* Product image badge */}
       <div
-        className="hidden sm:flex flex-shrink-0 items-center justify-center"
+        className="hidden sm:relative sm:flex shrink-0"
         style={{
-          width: "52px",
-          height: "52px",
-          backgroundColor: product.colorHex,
+          width: "72px",
+          height: "72px",
           boxShadow: hovered ? `0 0 28px ${product.colorHex}55` : "none",
           transition: "box-shadow 0.2s",
+          maskImage: "radial-gradient(ellipse at center, black 38%, transparent 78%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 38%, transparent 78%)",
         }}
       >
-        {product.icon}
+        <Image
+          src={product.imageUrl}
+          alt={product.name}
+          fill
+          priority
+          style={{ objectFit: "contain", objectPosition: "center" }}
+          sizes="72px"
+        />
       </div>
 
       {/* Center — category + name + description */}
