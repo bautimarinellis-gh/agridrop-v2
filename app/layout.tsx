@@ -2,6 +2,7 @@ import type { Metadata } from 'next'
 import { Barlow } from 'next/font/google'
 import './globals.css'
 import { Analytics } from "@vercel/analytics/next"
+import { WhatsAppFloat } from "@/components/whatsapp-float"
 
 const barlow = Barlow({
   subsets: ['latin'],
@@ -28,6 +29,7 @@ export default function RootLayout({
     <html lang="es" className="scroll-smooth" suppressHydrationWarning>
       <body className={`${barlow.variable} font-sans antialiased`} suppressHydrationWarning>
         {children}
+        <WhatsAppFloat />
         <div className="grain" aria-hidden="true" />
         <Analytics />
       </body>

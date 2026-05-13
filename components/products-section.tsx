@@ -202,10 +202,10 @@ export function ProductsSection() {
           </h2>
         </div>
 
-        {/* Product rows */}
-        <div className="flex flex-col gap-px">
+        {/* Product grid */}
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-5 gap-4">
           {products.map((product) => (
-            <ProductRow
+            <ProductCard
               key={product.name}
               product={product}
               onSelect={() => setSelectedProduct(product)}
@@ -433,31 +433,31 @@ export function ProductsSection() {
   )
 }
 
-/* ── Single product row ──────────────────────────────────────────────────── */
-function ProductRow({ product, onSelect }: { product: Product; onSelect: () => void }) {
+/* ── Single product card (vertical) ─────────────────────────────────────── */
+function ProductCard({ product, onSelect }: { product: Product; onSelect: () => void }) {
   const [hovered, setHovered] = useState(false)
 
   return (
     <article
-      className="flex items-center gap-3 sm:gap-6 px-4 py-5 sm:px-8 sm:py-8 transition-all duration-200"
+      className="flex flex-col transition-all duration-200"
       style={{
         backgroundColor: hovered ? "var(--surface-container)" : "var(--surface-container-low)",
-        borderTop: `1px solid ${product.colorHex}`,
+        borderTop: `2px solid ${product.colorHex}`,
         cursor: "default",
       }}
       onMouseEnter={() => setHovered(true)}
       onMouseLeave={() => setHovered(false)}
     >
-      {/* Product image badge */}
+      {/* Envase centrado */}
       <div
-        className="hidden sm:relative sm:flex shrink-0"
+        className="relative mx-auto"
         style={{
-          width: "72px",
-          height: "72px",
-          boxShadow: hovered ? `0 0 28px ${product.colorHex}55` : "none",
+          width: "100%",
+          height: "180px",
+          boxShadow: hovered ? `0 0 36px ${product.colorHex}40` : "none",
           transition: "box-shadow 0.2s",
-          maskImage: "radial-gradient(ellipse at center, black 38%, transparent 78%)",
-          WebkitMaskImage: "radial-gradient(ellipse at center, black 38%, transparent 78%)",
+          maskImage: "radial-gradient(ellipse at center, black 42%, transparent 78%)",
+          WebkitMaskImage: "radial-gradient(ellipse at center, black 42%, transparent 78%)",
         }}
       >
         <Image
@@ -466,30 +466,38 @@ function ProductRow({ product, onSelect }: { product: Product; onSelect: () => v
           fill
           priority
           style={{ objectFit: "contain", objectPosition: "center" }}
-          sizes="72px"
+          sizes="(max-width: 640px) 100vw, (max-width: 1024px) 50vw, 20vw"
         />
       </div>
 
-      {/* Center — category + name + description */}
-      <div className="flex-1 min-w-0">
-        <p className="label-style mb-1" style={{ color: product.colorHex, fontSize: "0.62rem" }}>
+      {/* Texto */}
+      <div className="flex flex-1 flex-col px-5 pb-5 pt-3">
+        <p className="label-style mb-1.5" style={{ color: product.colorHex, fontSize: "0.58rem" }}>
           {product.categoryShort}
         </p>
         <h3
           className="display-heading mb-2"
-          style={{ fontSize: "clamp(1.4rem, 3vw, 2rem)", color: "#ffffff", lineHeight: 1 }}
+          style={{ fontSize: "clamp(1.3rem, 2.5vw, 1.7rem)", color: "#ffffff", lineHeight: 1 }}
         >
           {product.name}
         </h3>
-        <p style={{ color: "rgba(255,255,255,0.5)", fontSize: "0.85rem", lineHeight: 1.55, maxWidth: "52ch" }}>
+        <p
+          style={{
+            color: "rgba(255,255,255,0.5)",
+            fontSize: "0.82rem",
+            lineHeight: 1.55,
+            flexGrow: 1,
+            display: "-webkit-box",
+            WebkitLineClamp: 3,
+            WebkitBoxOrient: "vertical",
+            overflow: "hidden",
+          }}
+        >
           {product.tagline}
         </p>
-      </div>
 
-      {/* Right — pills + dose + button */}
-      <div className="hidden lg:flex flex-col items-end flex-shrink-0 gap-3" style={{ minWidth: "240px" }}>
         {/* Pills */}
-        <div className="flex flex-wrap justify-end gap-2">
+        <div className="mt-3 flex flex-wrap gap-1.5">
           {product.benefits.map((b) => (
             <span
               key={b}
@@ -497,40 +505,27 @@ function ProductRow({ product, onSelect }: { product: Product; onSelect: () => v
               style={{
                 backgroundColor: "var(--surface-container-high)",
                 color: "rgba(255,255,255,0.55)",
-                padding: "0.3rem 0.7rem",
-                fontSize: "0.6rem",
+                padding: "0.25rem 0.55rem",
+                fontSize: "0.55rem",
               }}
             >
               {b}
             </span>
           ))}
-          {product.dose && (
-            <span
-              className="label-style"
-              style={{
-                backgroundColor: "var(--surface-container-high)",
-                color: "rgba(255,255,255,0.55)",
-                padding: "0.3rem 0.7rem",
-                fontSize: "0.6rem",
-              }}
-            >
-              DOSIS: {product.dose}
-            </span>
-          )}
         </div>
 
-        {/* FICHA TÉCNICA button */}
+        {/* CTA */}
         <button
           onClick={onSelect}
-          className="label-style transition-all duration-200"
+          className="label-style mt-4 transition-all duration-200"
           style={{
             border: `1px solid ${product.colorHex}`,
             color: product.colorHex,
-            padding: "0.45rem 1.1rem",
-            fontSize: "0.62rem",
+            padding: "0.5rem 0",
+            fontSize: "0.6rem",
             background: "transparent",
             cursor: "pointer",
-            whiteSpace: "nowrap",
+            width: "100%",
           }}
           onMouseEnter={(e) => {
             e.currentTarget.style.backgroundColor = product.colorHex
@@ -542,24 +537,6 @@ function ProductRow({ product, onSelect }: { product: Product; onSelect: () => v
           }}
         >
           FICHA TÉCNICA →
-        </button>
-      </div>
-
-      {/* Mobile CTA */}
-      <div className="flex lg:hidden flex-shrink-0">
-        <button
-          onClick={onSelect}
-          className="label-style"
-          style={{
-            border: `1px solid ${product.colorHex}`,
-            color: product.colorHex,
-            padding: "0.4rem 0.7rem",
-            fontSize: "0.6rem",
-            background: "transparent",
-            cursor: "pointer",
-          }}
-        >
-          VER →
         </button>
       </div>
     </article>

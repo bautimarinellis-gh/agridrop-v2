@@ -2,8 +2,8 @@
 
 const footerLinks = [
   { label: "Inicio", href: "#inicio" },
-  { label: "Nosotros", href: "#nosotros" },
   { label: "Productos", href: "#productos" },
+  { label: "Nosotros", href: "#nosotros" },
   { label: "Contacto", href: "#contacto" },
 ]
 
