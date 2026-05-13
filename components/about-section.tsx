@@ -1,5 +1,4 @@
 const stats = [
-  { value: "48%", label: "Concentración Activa" },
   { value: "ISO 9001", label: "Calidad Certificada" },
   { value: "5 LÍNEAS", label: "Completa Portfolio" },
 ]

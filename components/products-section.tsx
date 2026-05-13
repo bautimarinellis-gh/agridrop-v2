@@ -64,6 +64,7 @@ type Product = {
   dose: string | null
   presentation: string | null
   brochureUrl: string | null
+  labelUrl: string | null
   imageUrl: string
 }
 
@@ -86,6 +87,7 @@ const products: Product[] = [
     dose: "100 cc / 800 ppm de dureza en 100 L",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/forte_folleto.pdf",
+    labelUrl: "/fundas/forte_funda.pdf",
     imageUrl: "/imagenes_productos/forte_bidon.png",
   },
   {
@@ -93,7 +95,7 @@ const products: Product[] = [
     icon: <IconThor />,
     categoryShort: "Coadyuvante · Humectante · Adherente",
     colorHex: "#22c55e",
-    tagline: "Coadyuvante humectante-adherente con 48% de principio activo para máxima cobertura foliar.",
+    tagline: "Coadyuvante humectante-adherente para máxima cobertura y penetración foliar.",
     description: "Coadyuvante humectante, adherente y biodegradable de concentrado soluble. Formulado a base de alcohol lineal etoxilado de alta cadena de carbono y silicona. Excelente tensioactivo que mejora la cobertura y contacto de agroquímicos sobre la superficie foliar. Concentración del 48% de principio activo, muy por encima de la media del mercado.",
     highlights: [
       "Humectante, penetrante y adherente",
@@ -105,6 +107,7 @@ const products: Product[] = [
     dose: "25–50 cc / 100 L",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/drop_folleto.pdf",
+    labelUrl: "/fundas/thor_funda.pdf",
     imageUrl: "/imagenes_productos/thor_botella.png",
   },
   {
@@ -125,6 +128,7 @@ const products: Product[] = [
     dose: "200–400 ml/ha",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/flow_folleto.pdf",
+    labelUrl: "/fundas/flow_funda.pdf",
     imageUrl: "/imagenes_productos/flow_bidon.png",
   },
   {
@@ -150,6 +154,7 @@ const products: Product[] = [
     dose: "200–400 ml/ha",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/elixir_folleto.pdf",
+    labelUrl: "/fundas/elixir_funda.pdf",
     imageUrl: "/imagenes_productos/elixir_bidon.png",
   },
   {
@@ -170,6 +175,7 @@ const products: Product[] = [
     dose: "100 cc / 800 ppm de dureza en 100 L · mín. 25 cc/100 L en aguas <200 ppm",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/quality_folleto.pdf",
+    labelUrl: "/fundas/quality_funda.pdf",
     imageUrl: "/imagenes_productos/quality_botella.png",
   },
 ]
@@ -378,34 +384,66 @@ export function ProductsSection() {
                     </div>
                   )}
 
-                  {/* Botón descarga folleto */}
-                  {selectedProduct.brochureUrl && (
-                    <div style={{ paddingTop: "0.25rem", borderTop: "1px solid rgba(255,255,255,0.08)" }}>
-                      <a
-                        href={selectedProduct.brochureUrl}
-                        download={getBrochureFilename(selectedProduct.name)}
-                        className="label-style inline-flex items-center gap-2 transition-all duration-200"
-                        style={{
-                          border: `1px solid ${selectedProduct.colorHex}`,
-                          color: selectedProduct.colorHex,
-                          padding: "0.55rem 1.2rem",
-                          fontSize: "0.62rem",
-                          textDecoration: "none",
-                        }}
-                        onMouseEnter={(e) => {
-                          const el = e.currentTarget
-                          el.style.backgroundColor = selectedProduct.colorHex
-                          el.style.color = "#000"
-                        }}
-                        onMouseLeave={(e) => {
-                          const el = e.currentTarget
-                          el.style.backgroundColor = "transparent"
-                          el.style.color = selectedProduct.colorHex
-                        }}
-                      >
-                        <Download className="h-3.5 w-3.5 shrink-0" />
-                        DESCARGAR FOLLETO TÉCNICO
-                      </a>
+                  {/* Botones de descarga */}
+                  {(selectedProduct.brochureUrl || selectedProduct.labelUrl) && (
+                    <div
+                      className="flex flex-wrap gap-3"
+                      style={{ paddingTop: "1rem", borderTop: "1px solid rgba(255,255,255,0.08)" }}
+                    >
+                      {selectedProduct.brochureUrl && (
+                        <a
+                          href={selectedProduct.brochureUrl}
+                          download={getBrochureFilename(selectedProduct.name)}
+                          className="label-style inline-flex items-center gap-2 transition-all duration-200"
+                          style={{
+                            border: `1px solid ${selectedProduct.colorHex}`,
+                            color: selectedProduct.colorHex,
+                            padding: "0.55rem 1.2rem",
+                            fontSize: "0.62rem",
+                            textDecoration: "none",
+                          }}
+                          onMouseEnter={(e) => {
+                            const el = e.currentTarget
+                            el.style.backgroundColor = selectedProduct.colorHex
+                            el.style.color = "#000"
+                          }}
+                          onMouseLeave={(e) => {
+                            const el = e.currentTarget
+                            el.style.backgroundColor = "transparent"
+                            el.style.color = selectedProduct.colorHex
+                          }}
+                        >
+                          <Download className="h-3.5 w-3.5 shrink-0" />
+                          DESCARGAR FOLLETO TÉCNICO
+                        </a>
+                      )}
+                      {selectedProduct.labelUrl && (
+                        <a
+                          href={selectedProduct.labelUrl}
+                          download={`etiqueta-${selectedProduct.name.toLowerCase().replace(/\s/g, "-")}.pdf`}
+                          className="label-style inline-flex items-center gap-2 transition-all duration-200"
+                          style={{
+                            border: `1px solid ${selectedProduct.colorHex}`,
+                            color: selectedProduct.colorHex,
+                            padding: "0.55rem 1.2rem",
+                            fontSize: "0.62rem",
+                            textDecoration: "none",
+                          }}
+                          onMouseEnter={(e) => {
+                            const el = e.currentTarget
+                            el.style.backgroundColor = selectedProduct.colorHex
+                            el.style.color = "#000"
+                          }}
+                          onMouseLeave={(e) => {
+                            const el = e.currentTarget
+                            el.style.backgroundColor = "transparent"
+                            el.style.color = selectedProduct.colorHex
+                          }}
+                        >
+                          <Download className="h-3.5 w-3.5 shrink-0" />
+                          DESCARGAR ETIQUETA
+                        </a>
+                      )}
                     </div>
                   )}
                 </div>

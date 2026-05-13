@@ -1,6 +1,6 @@
 "use client"
 
-import { MessageCircle } from "lucide-react"
+import { Instagram, MessageCircle } from "lucide-react"
 
 const contactItems = [
   {
@@ -83,11 +83,7 @@ export function ContactSection() {
                 href={item.href}
                 target={item.href.startsWith("http") ? "_blank" : undefined}
                 rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className={`flex-1 flex flex-col justify-center group ${
-                  i < contactItems.length - 1
-                    ? "border-b border-white/10 sm:border-b-0 sm:border-r sm:border-white/10"
-                    : ""
-                }`}
+                className="flex-1 flex flex-col justify-center group border-b border-white/10 sm:border-b-0 sm:border-r sm:border-white/10"
                 style={{
                   padding: "1.5rem",
                   textDecoration: "none",
@@ -117,6 +113,25 @@ export function ContactSection() {
                 )}
               </a>
             ))}
+            {/* Instagram */}
+            <a
+              href="https://www.instagram.com/agridrop/"
+              target="_blank"
+              rel="noopener noreferrer"
+              className="flex-1 flex flex-col justify-center group"
+              style={{ padding: "1.5rem", textDecoration: "none" }}
+            >
+              <p className="label-style mb-2" style={{ color: "var(--primary)" }}>
+                INSTAGRAM
+              </p>
+              <p
+                className="group-hover:text-primary transition-colors duration-200 inline-flex items-center gap-2"
+                style={{ color: "#ffffff", fontSize: "1rem", fontWeight: 600, lineHeight: 1.4 }}
+              >
+                <Instagram className="h-4 w-4 shrink-0" />
+                @agridrop
+              </p>
+            </a>
           </div>
         </div>
       </div>
