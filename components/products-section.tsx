@@ -84,7 +84,7 @@ const products: Product[] = [
       "Ensayos INTA: +338 kg/ha en maíz · +214 kg/ha en soja",
     ],
     benefits: ["Avales INTA", "ISO 9001 · 14001"],
-    dose: "100 cc / 800 ppm de dureza en 100 L",
+    dose: "SOJA: 800 a 1200 cc/ha\nTRIGO: 800 a 1200 cc/ha\nMAÍZ: 2000 cc/ha\n\nVolumen de caldo recomendado: 100 L/ha",
     presentation: "Caja con 15 botellas de 1 L c/u.",
     brochureUrl: "/folletos/forte_folleto.pdf",
     labelUrl: "/fundas/forte_funda.pdf",
@@ -366,7 +366,7 @@ export function ProductsSection() {
                           <p className="label-style mb-1.5" style={{ color: "rgba(255,255,255,0.4)" }}>
                             Dosis recomendada
                           </p>
-                          <p style={{ fontSize: "0.95rem", fontWeight: 700, color: "#e8f0ec" }}>
+                          <p style={{ fontSize: "0.95rem", fontWeight: 700, color: "#e8f0ec", whiteSpace: "pre-line" }}>
                             {selectedProduct.dose}
                           </p>
                         </div>
