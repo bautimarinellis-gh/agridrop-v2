@@ -17,9 +17,9 @@ const contactItems = [
   },
   {
     label: "COMERCIAL",
-    value: "+54 3382 405621",
+    value: "+54 3382 679467",
     sub: null,
-    href: "tel:+543382405621",
+    href: "tel:+543382679467",
   },
 ]
 
@@ -139,7 +139,7 @@ export function ContactSection() {
       {/* ── WhatsApp CTA — full width ──────────────────────────────────── */}
       <div className="mx-auto max-w-7xl px-6" style={{ paddingTop: "1.4rem", paddingBottom: "5.5rem" }}>
         <a
-          href="https://wa.me/543382405621"
+          href="https://wa.me/543382679467"
           target="_blank"
           rel="noopener noreferrer"
           aria-label="Contactar por WhatsApp"
