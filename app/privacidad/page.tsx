@@ -1,5 +1,7 @@
 import type { Metadata } from "next"
 import Link from "next/link"
+import { Navbar } from "@/components/navbar"
+import { Footer } from "@/components/footer"
 
 export const metadata: Metadata = {
   title: "Política de privacidad - Agridrop",
@@ -111,48 +113,32 @@ const sections: { title: string; body: React.ReactNode }[] = [
 
 export default function PrivacidadPage() {
   return (
-    <main
-      style={{
-        backgroundColor: "var(--surface)",
-        color: "var(--foreground)",
-        minHeight: "100vh",
-      }}
-    >
-      <div className="mx-auto max-w-3xl px-6 py-16 md:py-24">
-        <Link
-          href="/"
-          className="label-style"
-          style={{ color: "var(--primary)", textDecoration: "none" }}
-        >
-          ← Volver al inicio
-        </Link>
+    <>
+      <Navbar solid />
+      <main className="bg-white pt-28 md:pt-36">
+        <div className="mx-auto max-w-3xl px-5 pb-20 md:px-8 md:pb-28">
+          <Link href="/" className="inline-block py-2 font-semibold text-leaf no-underline hover:underline">
+            ← Volver al inicio
+          </Link>
 
-        <h1
-          className="mt-8 text-4xl font-extrabold md:text-5xl"
-          style={{ letterSpacing: "-0.02em", lineHeight: 1.1 }}
-        >
-          Política de privacidad
-        </h1>
-        <p className="mt-4" style={{ color: "rgba(255,255,255,0.55)" }}>
-          Última actualización: 14 de noviembre de 2026
-        </p>
+          <h1 className="mt-6 text-4xl font-extrabold leading-[1.05] tracking-[-0.025em] md:text-5xl">
+            Política de privacidad
+          </h1>
+          <p className="mt-4 text-moss">Última actualización: 14 de noviembre de 2026</p>
 
-        <div className="privacy-body mt-12 flex flex-col gap-10">
-          {sections.map((section) => (
-            <section key={section.title} className="flex flex-col gap-3">
-              <h2 className="text-xl font-bold" style={{ color: "#ffffff" }}>
-                {section.title}
-              </h2>
-              <div
-                className="flex flex-col gap-3 [&_a]:underline [&_li]:ml-5 [&_li]:list-disc [&_ul]:flex [&_ul]:flex-col [&_ul]:gap-2"
-                style={{ color: "rgba(255,255,255,0.75)", lineHeight: 1.7 }}
-              >
-                {section.body}
-              </div>
-            </section>
-          ))}
+          <div className="mt-12 flex flex-col gap-10">
+            {sections.map((section) => (
+              <section key={section.title} className="flex flex-col gap-3">
+                <h2 className="text-xl font-bold">{section.title}</h2>
+                <div className="flex flex-col gap-3 leading-relaxed text-moss [&_a]:text-leaf [&_a]:underline [&_li]:ml-5 [&_li]:list-disc [&_ul]:flex [&_ul]:flex-col [&_ul]:gap-2">
+                  {section.body}
+                </div>
+              </section>
+            ))}
+          </div>
         </div>
-      </div>
-    </main>
+      </main>
+      <Footer />
+    </>
   )
 }

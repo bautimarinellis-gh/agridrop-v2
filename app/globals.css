@@ -3,178 +3,146 @@
 
 @custom-variant dark (&:is(.dark *));
 
-/* ─── Design Tokens — Synthetic Canopy ─────────────────────────────────── */
+/* ─── Colores y medidas de la marca ─────────────────────────────────────── */
 :root {
-  /* Surface scale */
-  --surface-dim:               #101413;
-  --surface:                   #141918;
-  --surface-container-low:     #1a1f1d;
-  --surface-container:         #1f2422;
-  --surface-container-high:    #252b28;
-  --surface-container-highest: #2b3330;
+  /* Verdes de Agridrop */
+  --forest:      #0c2b22; /* verde oscuro: fondos y texto principal */
+  --forest-deep: #081e18; /* pie de página y barra superior */
+  --leaf:        #0c5a3c; /* links y detalles sobre fondo claro */
+  --lime:        #b7d94c; /* acento: botones y números sobre fondo oscuro */
+  --lime-strong: #a6ca36;
 
-  /* Primary */
-  --primary:           #6effc0;
-  --primary-container: #00e5a0;
-  --on-primary:        #00201a;
-  --surface-tint:      #00e29e;
+  /* Neutros */
+  --mist:  #f1f4ee; /* fondo de secciones claras */
+  --line:  #d6ddd3; /* bordes */
+  --moss:  #44564d; /* texto secundario sobre claro */
+  --haze:  #dce6df; /* texto secundario sobre oscuro */
 
-  /* Ghost border */
-  --outline-variant: rgba(255, 255, 255, 0.10);
+  /* Color de cada producto (versión legible como texto sobre blanco) */
+  --drop-quality: #6b3fa0;
+  --drop-flow:    #0b6fb3;
+  --drop-thor:    #23701f;
+  --drop-elixir:  #7a5a00;
+  --drop-forte:   #b23a0a;
 
-  /* Product accent tokens */
-  --drop-forte:   #ff6b2b;
-  --drop-thor:    #22c55e;
-  --drop-flow:    #06b6d4;
-  --drop-elixir:  #d4a017;
-  --drop-quality: #a855f7;
-
-  /* ── shadcn/ui token bridge ──────────────────────────────────────────── */
-  --background:            var(--surface);
-  --foreground:            #e8f0ec;
-  --card:                  var(--surface-container);
-  --card-foreground:       #e8f0ec;
-  --popover:               var(--surface-container);
-  --popover-foreground:    #e8f0ec;
-  --secondary:             var(--surface-container-low);
-  --secondary-foreground:  #e8f0ec;
-  --muted:                 var(--surface-container-high);
-  --muted-foreground:      rgba(255, 255, 255, 0.55);
-  --accent:                var(--surface-container);
-  --accent-foreground:     #e8f0ec;
-  --destructive:           #ff4444;
-  --destructive-foreground:#ffffff;
-  --border:                var(--outline-variant);
-  --input:                 var(--surface-container-high);
-  --ring:                  var(--primary);
-  --radius:                0rem;
+  /* ── Puente con los componentes de shadcn/ui ─────────────────────────── */
+  --background:             #ffffff;
+  --foreground:             var(--forest);
+  --card:                   #ffffff;
+  --card-foreground:        var(--forest);
+  --popover:                #ffffff;
+  --popover-foreground:     var(--forest);
+  --primary:                var(--forest);
+  --primary-foreground:     #ffffff;
+  --secondary:              var(--mist);
+  --secondary-foreground:   var(--forest);
+  --muted:                  var(--mist);
+  --muted-foreground:       var(--moss);
+  --accent:                 var(--mist);
+  --accent-foreground:      var(--forest);
+  --destructive:            #b3261e;
+  --destructive-foreground: #ffffff;
+  --border:                 var(--line);
+  --input:                  var(--line);
+  --ring:                   var(--leaf);
+  --radius:                 0.75rem;
 }
 
 @theme inline {
-  --font-sans: var(--font-barlow, 'Barlow', system-ui, sans-serif);
-  --font-mono: 'Geist Mono', monospace;
+  --font-sans: var(--font-archivo), system-ui, sans-serif;
 
-  /* shadcn token mappings */
-  --color-background:              var(--background);
-  --color-foreground:              var(--foreground);
-  --color-card:                    var(--card);
-  --color-card-foreground:         var(--card-foreground);
-  --color-popover:                 var(--popover);
-  --color-popover-foreground:      var(--popover-foreground);
-  --color-primary:                 var(--primary);
-  --color-primary-foreground:      var(--on-primary);
-  --color-secondary:               var(--secondary);
-  --color-secondary-foreground:    var(--secondary-foreground);
-  --color-muted:                   var(--muted);
-  --color-muted-foreground:        var(--muted-foreground);
-  --color-accent:                  var(--accent);
-  --color-accent-foreground:       var(--accent-foreground);
-  --color-destructive:             var(--destructive);
-  --color-destructive-foreground:  var(--destructive-foreground);
-  --color-border:                  var(--border);
-  --color-input:                   var(--input);
-  --color-ring:                    var(--ring);
-  --radius-sm:  0rem;
-  --radius-md:  0rem;
-  --radius-lg:  0rem;
-  --radius-xl:  0rem;
-  --radius-2xl: 0rem;
+  --color-background:             var(--background);
+  --color-foreground:             var(--foreground);
+  --color-card:                   var(--card);
+  --color-card-foreground:        var(--card-foreground);
+  --color-popover:                var(--popover);
+  --color-popover-foreground:     var(--popover-foreground);
+  --color-primary:                var(--primary);
+  --color-primary-foreground:     var(--primary-foreground);
+  --color-secondary:              var(--secondary);
+  --color-secondary-foreground:   var(--secondary-foreground);
+  --color-muted:                  var(--muted);
+  --color-muted-foreground:       var(--muted-foreground);
+  --color-accent:                 var(--accent);
+  --color-accent-foreground:      var(--accent-foreground);
+  --color-destructive:            var(--destructive);
+  --color-destructive-foreground: var(--destructive-foreground);
+  --color-border:                 var(--border);
+  --color-input:                  var(--input);
+  --color-ring:                   var(--ring);
 
-  /* Design system surface utilities */
-  --color-surface-dim:               var(--surface-dim);
-  --color-surface:                   var(--surface);
-  --color-surface-container-low:     var(--surface-container-low);
-  --color-surface-container:         var(--surface-container);
-  --color-surface-container-high:    var(--surface-container-high);
-  --color-surface-container-highest: var(--surface-container-highest);
-  --color-on-primary:                var(--on-primary);
-  --color-outline-variant:           var(--outline-variant);
-  --color-surface-tint:              var(--surface-tint);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
 
-  /* Product accents */
-  --color-drop-forte:   var(--drop-forte);
-  --color-drop-thor:    var(--drop-thor);
-  --color-drop-flow:    var(--drop-flow);
-  --color-drop-elixir:  var(--drop-elixir);
-  --color-drop-quality: var(--drop-quality);
+  /* Marca */
+  --color-forest:      var(--forest);
+  --color-forest-deep: var(--forest-deep);
+  --color-leaf:        var(--leaf);
+  --color-lime:        var(--lime);
+  --color-lime-strong: var(--lime-strong);
+  --color-mist:        var(--mist);
+  --color-line:        var(--line);
+  --color-moss:        var(--moss);
+  --color-haze:        var(--haze);
 }
 
-/* ─── Base Styles ───────────────────────────────────────────────────────── */
+/* ─── Base ──────────────────────────────────────────────────────────────── */
 @layer base {
   * {
-    border-radius: 0 !important;
     @apply border-border outline-ring/50;
   }
 
+  html {
+    scroll-padding-top: 5rem; /* que el menú fijo no tape el título al saltar a una sección */
+  }
+
   body {
-    background-color: var(--surface-dim);
-    color: #e8f0ec;
-    font-family: 'Barlow', system-ui, sans-serif;
-    font-weight: 400;
-    line-height: 1.6;
+    background-color: var(--background);
+    color: var(--foreground);
+    line-height: 1.55;
   }
 
-  h1, h2, h3, h4, h5, h6 {
-    font-family: 'Barlow', system-ui, sans-serif;
-  }
-}
-
-/* ─── Grain Overlay ─────────────────────────────────────────────────────── */
-.grain {
-  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)'/%3E%3C/svg%3E");
-  opacity: 0.03;
-  position: fixed;
-  inset: 0;
-  pointer-events: none;
-  z-index: 999;
-}
-
-/* ─── Marquee Animation ─────────────────────────────────────────────────── */
-@keyframes marquee {
-  from { transform: translateX(0); }
-  to   { transform: translateX(-50%); }
-}
-
-.marquee-track {
-  display: flex;
-  width: max-content;
-  animation: marquee 90s linear infinite;
-  will-change: transform;
-}
-
-/* ─── Responsive Dialog ─────────────────────────────────────────────────── */
-.dialog-product {
-  padding: 1.5rem;
-}
-
-.dialog-product .dialog-color-bar {
-  margin-left: -1.5rem;
-  margin-right: -1.5rem;
-  margin-top: -1.5rem;
-}
-
-@media (min-width: 640px) {
-  .dialog-product {
-    padding: 2.5rem;
-  }
-
-  .dialog-product .dialog-color-bar {
-    margin-left: -2.5rem;
-    margin-right: -2.5rem;
-    margin-top: -2.5rem;
+  :focus-visible {
+    outline: 2px solid var(--leaf);
+    outline-offset: 3px;
   }
 }
 
-/* ─── Typography Utilities ──────────────────────────────────────────────── */
-.label-style {
-  font-weight: 600;
-  letter-spacing: 0.1em;
-  text-transform: uppercase;
-  font-size: 0.7rem;
+/* ─── Utilidades de la marca ────────────────────────────────────────────── */
+@utility container-site {
+  margin-inline: auto;
+  width: 100%;
+  max-width: 77.5rem;
+  padding-inline: 1.25rem;
+
+  @media (min-width: 48rem) {
+    padding-inline: 2rem;
+  }
 }
 
-.display-heading {
+/* Título de sección: grande, apretado, en minúscula normal */
+@utility heading-section {
   font-weight: 800;
-  letter-spacing: -0.05em;
-  text-transform: uppercase;
+  font-size: clamp(2rem, 4.2vw, 3rem);
+  line-height: 1.04;
+  letter-spacing: -0.025em;
+  text-wrap: balance;
+}
+
+/* Botón principal (píldora) */
+@utility btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.6rem;
+  min-height: 3rem;
+  padding: 0.8rem 1.6rem;
+  border-radius: 999px;
+  font-weight: 700;
+  font-size: 1rem;
+  line-height: 1.2;
+  text-decoration: none;
+  transition: background-color 0.15s, color 0.15s, border-color 0.15s;
 }

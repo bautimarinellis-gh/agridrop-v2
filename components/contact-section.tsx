@@ -1,174 +1,72 @@
-"use client"
-
-import { Instagram, MessageCircle } from "lucide-react"
+import Image from "next/image"
+import { MessageCircle } from "lucide-react"
+import {
+  EMAIL,
+  INSTAGRAM_URL,
+  MAPS_URL,
+  PHONE_DISPLAY,
+  PHONE_URL,
+  WHATSAPP_URL,
+} from "@/lib/site"
 
 const contactItems = [
-  {
-    label: "UBICACIÓN",
-    value: "Ruta 33, Km 540",
-    sub: "Rufino, Santa Fe",
-    href: "https://maps.google.com/?q=Ruta+33+km+540,+Rufino,+Santa+Fe,+Argentina",
-  },
-  {
-    label: "E-MAIL",
-    value: "contacto.agridrop@gmail.com",
-    sub: null,
-    href: "contacto.agridrop@gmail.com",
-  },
-  {
-    label: "COMERCIAL",
-    value: "+54 3382 679467",
-    sub: null,
-    href: "tel:+543382679467",
-  },
+  { label: "Ubicación", value: "Ruta 33, km 540 · Rufino, Santa Fe", href: MAPS_URL, external: true },
+  { label: "Teléfono", value: PHONE_DISPLAY, href: PHONE_URL, external: false },
+  { label: "Correo", value: EMAIL, href: `mailto:${EMAIL}`, external: false },
+  { label: "Instagram", value: "@agridrop", href: INSTAGRAM_URL, external: true },
 ]
 
 export function ContactSection() {
   return (
-    <section id="contacto" style={{ backgroundColor: "var(--surface-dim)" }}>
-
-      {/* ── HABLEMOS. block ────────────────────────────────────────────── */}
-      <div
-        style={{
-          position: "relative",
-          overflow: "hidden",
-          paddingTop: "5.5rem",
-          paddingBottom: "2rem",
-        }}
-      >
-        {/* HABLEMOS. — smaller, centered, above the contact row */}
-        <div
-          aria-hidden="true"
-          style={{
-            position: "absolute",
-            top: 0,
-            left: 0,
-            right: 0,
-            display: "flex",
-            justifyContent: "center",
-            overflow: "hidden",
-            pointerEvents: "none",
-            userSelect: "none",
-            paddingTop: "2rem",
-          }}
-        >
-          <span
-            className="display-heading"
-            style={{
-              fontSize: "clamp(4.5rem, 14vw, 11rem)",
-              color: "rgba(255,255,255,0.08)",
-              whiteSpace: "nowrap",
-              lineHeight: 1,
-            }}
-          >
-            HABLEMOS.
-          </span>
+    <section id="contacto" className="bg-forest py-20 text-white lg:py-28">
+      <div className="container-site grid gap-x-20 gap-y-12 lg:grid-cols-[1fr_1.15fr] lg:items-center">
+        <div className="relative aspect-[4/3] overflow-hidden rounded-2xl lg:aspect-square">
+          <Image
+            src="/images/pallet-drop-elixir.jpg"
+            alt="Pallet de Drop Elixir cargado en una camioneta, listo para entregar"
+            fill
+            className="object-cover"
+            sizes="(max-width: 1024px) 100vw, 560px"
+          />
         </div>
 
-        {/* Contact row — floats below HABLEMOS. */}
-        <div
-          className="mx-auto max-w-7xl px-6"
-          style={{ position: "relative", zIndex: 1, paddingTop: "clamp(5rem, 20vw, 10rem)" }}
-        >
-          <div
-            className="flex flex-col sm:flex-row"
-            style={{
-              borderTop: "1px solid var(--outline-variant)",
-              borderBottom: "1px solid var(--outline-variant)",
-            }}
+        <div>
+          <h2 className="text-balance text-[clamp(2.25rem,5vw,3.5rem)] font-extrabold leading-none tracking-[-0.03em]">
+            Hablemos de tu próxima aplicación
+          </h2>
+          <p className="mt-5 max-w-lg text-lg text-haze">
+            Te asesoramos por WhatsApp sobre dosis, mezcla y disponibilidad, y
+            enviamos el pedido a todo el país.
+          </p>
+          <a
+            href={WHATSAPP_URL}
+            target="_blank"
+            rel="noopener noreferrer"
+            className="btn mt-8 bg-lime px-8 py-4 text-lg text-forest hover:bg-lime-strong"
           >
-            {contactItems.map((item, i) => (
-              <a
-                key={item.label}
-                href={item.href}
-                target={item.href.startsWith("http") ? "_blank" : undefined}
-                rel={item.href.startsWith("http") ? "noopener noreferrer" : undefined}
-                className="flex-1 flex flex-col justify-center group border-b border-white/10 sm:border-b-0 sm:border-r sm:border-white/10"
-                style={{
-                  padding: "1.5rem",
-                  textDecoration: "none",
-                }}
-              >
-                <p
-                  className="label-style mb-2"
-                  style={{ color: "var(--primary)" }}
-                >
-                  {item.label}
-                </p>
-                <p
-                  className="group-hover:text-primary transition-colors duration-200"
-                  style={{
-                    color: "#ffffff",
-                    fontSize: "1rem",
-                    fontWeight: 600,
-                    lineHeight: 1.4,
-                  }}
-                >
-                  {item.value}
-                </p>
-                {item.sub && (
-                  <p style={{ color: "rgba(255,255,255,0.4)", fontSize: "0.875rem", marginTop: "0.2rem" }}>
-                    {item.sub}
-                  </p>
-                )}
-              </a>
+            <MessageCircle className="h-5 w-5" aria-hidden />
+            Escribir por WhatsApp
+          </a>
+
+          <dl className="mt-12 grid gap-x-8 gap-y-6 border-t border-white/15 pt-8 sm:grid-cols-2">
+            {contactItems.map((item) => (
+              <div key={item.label}>
+                <dt className="text-sm text-haze">{item.label}</dt>
+                <dd className="mt-1">
+                  <a
+                    href={item.href}
+                    target={item.external ? "_blank" : undefined}
+                    rel={item.external ? "noopener noreferrer" : undefined}
+                    className="inline-block break-words py-1 font-semibold text-white underline decoration-white/30 underline-offset-4 hover:decoration-lime"
+                  >
+                    {item.value}
+                  </a>
+                </dd>
+              </div>
             ))}
-            {/* Instagram */}
-            <a
-              href="https://www.instagram.com/agridrop/"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="flex-1 flex flex-col justify-center group"
-              style={{ padding: "1.5rem", textDecoration: "none" }}
-            >
-              <p className="label-style mb-2" style={{ color: "var(--primary)" }}>
-                INSTAGRAM
-              </p>
-              <p
-                className="group-hover:text-primary transition-colors duration-200 inline-flex items-center gap-2"
-                style={{ color: "#ffffff", fontSize: "1rem", fontWeight: 600, lineHeight: 1.4 }}
-              >
-                <Instagram className="h-4 w-4 shrink-0" />
-                @agridrop
-              </p>
-            </a>
-          </div>
+          </dl>
         </div>
       </div>
-
-      {/* ── WhatsApp CTA — full width ──────────────────────────────────── */}
-      <div className="mx-auto max-w-7xl px-6" style={{ paddingTop: "1.4rem", paddingBottom: "5.5rem" }}>
-        <a
-          href="https://wa.me/543382679467"
-          target="_blank"
-          rel="noopener noreferrer"
-          aria-label="Contactar por WhatsApp"
-          className="flex w-full items-center justify-center gap-3 transition-all duration-200"
-          style={{
-            border: "1px solid var(--primary)",
-            color: "var(--primary)",
-            backgroundColor: "transparent",
-            padding: "1.4rem",
-            fontWeight: 700,
-            letterSpacing: "0.1em",
-            textTransform: "uppercase",
-            fontSize: "0.8rem",
-            textDecoration: "none",
-          }}
-          onMouseEnter={(e) => {
-            e.currentTarget.style.backgroundColor = "var(--primary)"
-            e.currentTarget.style.color = "var(--on-primary)"
-          }}
-          onMouseLeave={(e) => {
-            e.currentTarget.style.backgroundColor = "transparent"
-            e.currentTarget.style.color = "var(--primary)"
-          }}
-        >
-          <MessageCircle className="h-5 w-5" strokeWidth={2} />
-          CONTACTAR VÍA WHATSAPP
-        </a>
-      </div>
-
     </section>
   )
 }
